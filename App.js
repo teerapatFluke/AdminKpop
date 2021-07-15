@@ -1,16 +1,14 @@
 import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import StackRequest from "./src/Request/StackRequest";
-import { DefaultTheme, Provider as PaperProvider } from "react-native-paper";
-
+import StackManageArtist from "./src/ManageArtist/StackManageArtist";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import Entypo from "react-native-vector-icons/Entypo";
-import FontAwesome from "react-native-vector-icons/FontAwesome";
+import StackManageEvent from "./src/MamagerEvent/StackManageEvent";
 import {
   useFonts,
   Kanit_400Regular,
@@ -21,7 +19,7 @@ import AppLoading from "expo-app-loading";
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
-export default function App() {
+const App = () => {
   let [fontsLoaded] = useFonts({
     Kanit_400Regular,
     Kanit_200ExtraLight,
@@ -70,11 +68,13 @@ export default function App() {
       >
         <Tab.Screen name="TabRequest" component={StackRequest} />
         {/* <Tab.Screen name="Home" component={StackMenu} /> */}
-        <Tab.Screen name="TabArtist" component={StackRequest} />
-        <Tab.Screen name="TabEvents" component={StackRequest} />
+        <Tab.Screen name="TabArtist" component={StackManageArtist} />
+        <Tab.Screen name="TabEvents" component={StackManageEvent} />
 
         <Tab.Screen name="TabBug" component={StackRequest} />
       </Tab.Navigator>
     </NavigationContainer>
   );
-}
+};
+
+export default App;
