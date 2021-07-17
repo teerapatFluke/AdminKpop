@@ -68,4 +68,9 @@ export default StyleSheet.create({
     marginHorizontal: 14,
     justifyContent: "center",
   },
+  text_input_date: {
+    marginTop: 7,
+    marginLeft: 14,
+    justifyContent: "center",
+  },
 });
