@@ -10,7 +10,7 @@ import { AsAPI } from "./Artist-api";
 const ArtistAdd = ({ navigation }) => {
   const [artist_name_TH, setartist_name_TH] = useState("");
   const [artist_name_EN, setartist_name_EN] = useState("");
-  const [image, setImage] = useState(null);
+  const [image, setImage] = useState("");
   const [imgName, setImageName] = useState("");
   const [artist_picture, setArtist_picture] = useState("as");
   const pickImage = async () => {
@@ -61,10 +61,7 @@ const ArtistAdd = ({ navigation }) => {
   };
 
   const addArtist = () => {
-    uploadFile();
-    AsAPI.addArtist({ artist_name_TH, artist_name_EN, artist_picture })
-      .then((resp) => console.log(resp))
-      .catch((error) => console.log(error));
+    AsAPI.addArtist({ artist_name_TH, artist_name_EN, artist_picture });
   };
   return (
     <Provider>

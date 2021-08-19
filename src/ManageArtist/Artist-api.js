@@ -1,12 +1,19 @@
 export class AsAPI {
   static addArtist(body) {
-    return fetch(`http://127.0.0.1:8000/api/artist/`, {
+    return fetch(`https://kpopevent2.herokuapp.com/api/artist/`, {
       method: "POST",
       headers: {
         "content-Type": "application/json",
         //Authorization: `Token ${token}`,
       },
       body: JSON.stringify(body),
-    }).then((resp) => resp.json());
+    })
+      .then((response) => response.json())
+      .then((responseJson) => {
+        console.log(responseJson);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   }
 }
