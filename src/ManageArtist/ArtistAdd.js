@@ -61,7 +61,12 @@ const ArtistAdd = ({ navigation }) => {
   };
 
   const addArtist = () => {
-    AsAPI.addArtist({ artist_name_TH, artist_name_EN, artist_picture });
+    AsAPI.addArtist({ artist_name_TH, artist_name_EN })
+      .then((resp) => resp.json())
+      .then((resp) => console.log(resp))
+      .catch((error) => {
+        console.error(error);
+      });
   };
   return (
     <Provider>
@@ -168,7 +173,6 @@ const style = StyleSheet.create({
     },
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
-
     elevation: 5,
   },
 });
