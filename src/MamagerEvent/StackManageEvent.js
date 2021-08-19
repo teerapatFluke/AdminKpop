@@ -3,6 +3,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import EventMenu from "./EventMenu";
 import EventAdd from "./EventAdd";
 import EventList from "./EventList";
+import EventTicket from "./EventTicket";
 const Stack = createStackNavigator();
 const StackManageEvent = () => {
   return (
@@ -23,6 +24,11 @@ const StackManageEvent = () => {
       <Stack.Screen name="อีเว้นท์" component={EventMenu} />
       <Stack.Screen name="จัดการข้อมูลอีเว้นท์" component={EventList} />
       <Stack.Screen name="เพิ่มข้อมูลอีเว้นท์" component={EventAdd} />
+      <Stack.Screen
+        name="จัดการข้อมูลช่องทางการซื้อบัตร"
+        component={EventTicket}
+        options={{ headerTitle: "ช่องทางการซื้อบัตร" }}
+      />
     </Stack.Navigator>
   );
 };

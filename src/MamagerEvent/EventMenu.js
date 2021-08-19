@@ -31,6 +31,7 @@ const EventMenu = ({ navigation }) => {
   return (
     <ScrollView>
       <MenuCard name="จัดการข้อมูลอีเว้นท์"></MenuCard>
+      <MenuCard name="จัดการข้อมูลช่องทางการซื้อบัตร"></MenuCard>
     </ScrollView>
   );
 };
@@ -53,6 +54,7 @@ const styles = StyleSheet.create({
     height: 72,
     alignSelf: "center",
     marginTop: 7,
+    marginBottom: 7,
   },
 });
 export default EventMenu;

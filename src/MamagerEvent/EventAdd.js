@@ -5,10 +5,9 @@ import {
   ScrollView,
   TouchableOpacity,
   Platform,
-  Button,
 } from "react-native";
 import Style from "../Style";
-import { TextInput, Provider, DefaultTheme } from "react-native-paper";
+import { TextInput, Provider, DefaultTheme, Button } from "react-native-paper";
 import DropDown from "react-native-paper-dropdown";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import moment from "moment";
@@ -88,6 +87,109 @@ const EventAdd = () => {
           onConfirm={handleConfirm}
           onCancel={hideDatePicker}
         />
+        <View style={{ flex: 1, flexDirection: "row" }}>
+          <View style={{ flex: 1 }}>
+            <TextInput
+              label="วันจบอีเว้นท์"
+              value={text2}
+              style={Style.text_input_date}
+              onChangeText={(text) => setText2(text)}
+              theme={theme}
+              disabled
+            />
+          </View>
+          <View style={{ marginHorizontal: 14, alignSelf: "center" }}>
+            <TouchableOpacity onPress={() => setDatePickerVisibility(true)}>
+              <AntDesign name="calendar" size={30} />
+            </TouchableOpacity>
+          </View>
+        </View>
+        <DateTimePickerModal
+          isVisible={isDatePickerVisible}
+          mode="date"
+          onConfirm={handleConfirm}
+          onCancel={hideDatePicker}
+        />
+        <View style={{ flex: 1, flexDirection: "row" }}>
+          <View style={{ flex: 1 }}>
+            <TextInput
+              label="วันที่เริ่มขายบัตร"
+              value={text2}
+              style={Style.text_input_date}
+              onChangeText={(text) => setText2(text)}
+              theme={theme}
+              disabled
+            />
+          </View>
+          <View style={{ marginHorizontal: 14, alignSelf: "center" }}>
+            <TouchableOpacity onPress={() => setDatePickerVisibility(true)}>
+              <AntDesign name="calendar" size={30} />
+            </TouchableOpacity>
+          </View>
+        </View>
+        <DateTimePickerModal
+          isVisible={isDatePickerVisible}
+          mode="date"
+          onConfirm={handleConfirm}
+          onCancel={hideDatePicker}
+        />
+        <Text style={Style.text_400_add}>ช่องทางการสั่งซื้อบัตร</Text>
+        <View style={Style.drop_down}>
+          <DropDown
+            value={gender}
+            setValue={setGender}
+            list={genderList}
+            visible={showDropDown}
+            showDropDown={() => setShowDropDown(true)}
+            onDismiss={() => setShowDropDown(false)}
+            inputProps={{
+              right: <TextInput.Icon name={"menu-down"} />,
+            }}
+            dropDownItemSelectedTextStyle={{ fontFamily: "Kanit_400Regular" }}
+            dropDownItemTextStyle={{ fontFamily: "Kanit_400Regular" }}
+          />
+        </View>
+        <Text style={Style.text_400_add}>สถานที่จัต</Text>
+        <View style={Style.drop_down}>
+          <DropDown
+            value={gender}
+            setValue={setGender}
+            list={genderList}
+            visible={showDropDown}
+            showDropDown={() => setShowDropDown(true)}
+            onDismiss={() => setShowDropDown(false)}
+            inputProps={{
+              right: <TextInput.Icon name={"menu-down"} />,
+            }}
+            dropDownItemSelectedTextStyle={{ fontFamily: "Kanit_400Regular" }}
+            dropDownItemTextStyle={{ fontFamily: "Kanit_400Regular" }}
+          />
+        </View>
+        <Text style={Style.text_400_add}>ตัวแทนผู้จัด</Text>
+        <View style={Style.drop_down}>
+          <DropDown
+            value={gender}
+            setValue={setGender}
+            list={genderList}
+            visible={showDropDown}
+            showDropDown={() => setShowDropDown(true)}
+            onDismiss={() => setShowDropDown(false)}
+            inputProps={{
+              right: <TextInput.Icon name={"menu-down"} />,
+            }}
+            dropDownItemSelectedTextStyle={{ fontFamily: "Kanit_400Regular" }}
+            dropDownItemTextStyle={{ fontFamily: "Kanit_400Regular" }}
+          />
+        </View>
+        <View style={{ alignSelf: "center", marginTop: 14, marginBottom: 14 }}>
+          <Button
+            mode="contained"
+            onPress={() => navigation.navigate("จัดการข้อมูลศิลปิน")}
+            style={Style.Add_Button}
+          >
+            <Text style={Style.text_400}>เพิ่มข้อมูล</Text>
+          </Button>
+        </View>
       </ScrollView>
     </Provider>
   );
