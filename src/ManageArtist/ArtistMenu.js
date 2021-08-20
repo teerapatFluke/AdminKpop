@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
   StyleSheet,
   ScrollView,
   TouchableOpacity,
+  FlatList,
 } from "react-native";
 import {
   Searchbar,
@@ -17,15 +18,57 @@ import {
   Provider,
   FAB,
 } from "react-native-paper";
-
+import { NavigationContainer, useIsFocused } from "@react-navigation/native";
+import { AsAPI } from "./Artist-api";
 const ArtistMenu = ({ navigation }) => {
   const [visible, setVisible] = useState(false);
-  const [as, setas] = useState("");
-  const showDialog = () => setVisible(true);
+  const [asSelect, setAsSelect] = useState("");
+  const [asid, setAsSelectID] = useState("");
+  const isFocused = useIsFocused();
+  const showDialog = ({ artistname, asid }) => {
+    setVisible(true);
+    setAsSelect(artistname);
+    setAsSelectID(asid.toString());
+  };
 
   const hideDialog = () => setVisible(false);
+  const [artist, setArtist] = useState(null);
 
-  const ArtistAvatar = () => {
+  const edit = () => {
+    navigation.navigate("แก้ไขข้อมูลศิลปิน", {
+      id: asid,
+    });
+    hideDialog();
+    setArtist(null);
+  };
+
+  const deleteAS = () => {
+    AsAPI.deleteArtist(asid)
+      .then((res) => res.text()) // or res.json()
+      .then(refresh())
+      .catch((error) => {
+        console.error(error);
+      });
+    hideDialog();
+  };
+  const refresh = () => {
+    AsAPI.getArtist()
+      .then((resp) => resp.json())
+      .then((resp) => setArtist(resp))
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+  useEffect(() => {
+    AsAPI.getArtist()
+      .then((resp) => resp.json())
+      .then((resp) => setArtist(resp))
+      .catch((error) => {
+        console.error(error);
+      });
+  }, [isFocused]);
+
+  const ArtistAvatar = ({ uri }) => {
     return (
       <Avatar.Image
         style={{
@@ -33,20 +76,22 @@ const ArtistMenu = ({ navigation }) => {
           backgroundColor: "none",
         }}
         size={60}
-        source={require("../../a.jpg")}
+        source={{
+          uri: uri,
+        }}
       />
     );
   };
-  const ArtsitCard = () => {
+  const ArtsitCard = ({ artistname, uri, asid }) => {
     return (
-      <TouchableOpacity onPress={showDialog}>
+      <TouchableOpacity onPress={() => showDialog({ artistname, asid })}>
         <Card style={styles.event}>
           <Card.Content style={{ flex: 1, flexDirection: "row" }}>
             <View style={{ alignSelf: "center" }}>
-              <ArtistAvatar></ArtistAvatar>
+              <ArtistAvatar uri={uri}></ArtistAvatar>
             </View>
             <View style={{ justifyContent: "center" }}>
-              <Text style={styles.artist_name}>Artist</Text>
+              <Text style={styles.artist_name}>{artistname}</Text>
             </View>
           </Card.Content>
         </Card>
@@ -55,9 +100,20 @@ const ArtistMenu = ({ navigation }) => {
   };
   return (
     <Provider>
-      <ScrollView>
-        <ArtsitCard></ArtsitCard>
-      </ScrollView>
+      <FlatList
+        data={artist}
+        keyExtractor={(item) => item.id.toString()}
+        renderItem={({ item }) => (
+          <ScrollView>
+            <ArtsitCard
+              artistname={item.artist_name_EN}
+              uri={item.artist_picture}
+              asid={item.id}
+            ></ArtsitCard>
+          </ScrollView>
+        )}
+      />
+
       <FAB
         style={styles.fab}
         icon="plus"
@@ -67,20 +123,23 @@ const ArtistMenu = ({ navigation }) => {
       />
       <Portal>
         <Dialog visible={visible} onDismiss={hideDialog}>
-          <Dialog.Title>Alert</Dialog.Title>
+          <Dialog.Title>
+            {" "}
+            <Text style={styles.artist_name}>จัดการข้อมูลศิลปิน</Text>
+          </Dialog.Title>
           <Dialog.Content>
-            <Paragraph>This is simple dialog</Paragraph>
+            <Paragraph>{asSelect}</Paragraph>
           </Dialog.Content>
           <Dialog.Actions
             style={{
               justifyContent: "center",
             }}
           >
-            <Button style={{ flex: 1 }} onPress={() => setas("Pressed")}>
-              Cancel
+            <Button style={{ flex: 1 }} onPress={edit}>
+              <Text style={styles.artist_name}> แก้ไขข้อมูล</Text>
             </Button>
-            <Button style={{ flex: 1 }} onPress={() => console.log({ as })}>
-              Ok
+            <Button style={{ flex: 1 }} onPress={deleteAS}>
+              <Text style={styles.artist_name}> ลบข้อมูล</Text>
             </Button>
           </Dialog.Actions>
         </Dialog>

@@ -1,37 +1,131 @@
-import React from "react";
-import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import React, { useState, useEffect } from "react";
+import { View, Text, TouchableOpacity, StyleSheet, Image } from "react-native";
 import { Avatar, Provider, TextInput, Button } from "react-native-paper";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import Style from "../Style";
+import { AsAPI } from "./Artist-api";
+import moment from "moment";
+import * as ImagePicker from "expo-image-picker";
+import { RNS3 } from "react-native-aws3";
+const ArtistEdit = ({ route, navigation }) => {
+  const { id } = route.params;
+  const [artist, setartist] = useState([]);
+  const [artist_name_TH, setTH] = useState("");
+  const [artist_name_EN, setEN] = useState("");
+  const [image, setImage] = useState("");
+  const [imgName, setImageName] = useState("");
+  const [artist_picture, setArtist_picture] = useState("");
+  useEffect(() => {
+    AsAPI.getArtistID(id)
+      .then((resp) => resp.json())
+      .then((resp) => setartist(resp))
+      .catch((error) => {
+        console.error(error);
+      });
+  }, [id]);
 
-const ArtistEdit = () => {
-  const [text, setText] = React.useState("");
+  useEffect(() => {
+    if (artist !== []) {
+      setTH(artist.artist_name_TH);
+      setEN(artist.artist_name_EN);
+      setImage(artist.artist_picture);
+      setArtist_picture(artist.artist_picture);
+    }
+  }, [artist]);
+
+  const pickImage = async () => {
+    let name = moment().format("MMMMDoYYYYhmmssa");
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [3, 3],
+      quality: 1,
+    });
+
+    if (!result.cancelled) {
+      setImage(result.uri);
+      setImageName(name);
+      setArtist_picture(
+        "https://kpop1.s3.ap-southeast-1.amazonaws.com/" + name
+      );
+      console.log(image);
+    }
+  };
+
+  const uploadFile = () => {
+    if (Object.keys(image).length == 0) {
+      alert("Please select image first");
+      return;
+    }
+    RNS3.put(
+      {
+        uri: image,
+        name: imgName,
+        type: "image/jpeg",
+      },
+      {
+        keyPrefix: "",
+        bucket: "kpop1",
+        region: "ap-southeast-1",
+        accessKey: "AKIA476CQJMRSGHUTNRE",
+        secretKey: "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",
+        successActionStatus: 201,
+      }
+    ).then((response) => {
+      if (response.status !== 201) alert("Failed to upload image to S3");
+      console.log(response.body);
+    });
+  };
+
+  const editArtist = () => {
+    if (imgName !== "") {
+      uploadFile();
+    }
+    AsAPI.editArtist(artist.id, {
+      artist_name_TH,
+      artist_name_EN,
+      artist_picture,
+    })
+      .then((resp) => resp.json())
+      .then((resp) => console.log(resp))
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
   return (
     <Provider>
       <View>
         <View style={{ alignSelf: "center", marginTop: 7, marginBottom: 7 }}>
-          <TouchableOpacity style={style.addphoto_button}>
-            <MaterialIcons name="add-a-photo" size={40} />
-          </TouchableOpacity>
+          {artist_picture !== "" ? (
+            <TouchableOpacity onPress={pickImage}>
+              <Image
+                style={style.addphoto_button}
+                source={{
+                  uri: image,
+                }}
+              />
+            </TouchableOpacity>
+          ) : null}
         </View>
         <View>
           <TextInput
             label="ชื่อศิลปินภาษาไทย"
-            value={text}
-            onChangeText={(text) => setText(text)}
+            value={artist_name_TH}
+            onChangeText={(text) => setTH(text)}
             style={style.text_input}
           />
           <TextInput
             label="ชื่อศิลปินภาษาอังกฤษ"
-            value={text}
+            value={artist_name_EN}
             style={style.text_input}
-            onChangeText={(text) => setText(text)}
+            onChangeText={(text) => setEN(text)}
           />
         </View>
         <View style={{ alignSelf: "center", marginTop: 14 }}>
           <Button
             mode="contained"
-            onPress={() => console.log("Pressed")}
+            onPress={editArtist}
             style={Style.Edit_Button}
           >
             <Text style={Style.text_400}>แก้ไขข้อมูล</Text>
@@ -58,8 +152,6 @@ const style = StyleSheet.create({
     },
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
-
-    elevation: 5,
   },
   text_input: {
     width: "93%",

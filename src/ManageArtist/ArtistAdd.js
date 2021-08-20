@@ -12,17 +12,15 @@ const ArtistAdd = ({ navigation }) => {
   const [artist_name_EN, setartist_name_EN] = useState("");
   const [image, setImage] = useState("");
   const [imgName, setImageName] = useState("");
-  const [artist_picture, setArtist_picture] = useState("as");
+  const [artist_picture, setArtist_picture] = useState("");
   const pickImage = async () => {
-    let name = moment().format("MMMM Do YYYY, h:mm:ss a");
+    let name = moment().format("MMMMDoYYYYhmmssa");
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
       allowsEditing: true,
-      aspect: [4, 3],
+      aspect: [3, 3],
       quality: 1,
     });
-
-    console.log(result);
 
     if (!result.cancelled) {
       setImage(result.uri);
@@ -57,11 +55,14 @@ const ArtistAdd = ({ navigation }) => {
       console.log(response.body);
       setImage(null);
       setImageName("");
+      setartist_name_TH("");
+      setartist_name_EN("");
     });
   };
 
   const addArtist = () => {
-    AsAPI.addArtist({ artist_name_TH, artist_name_EN })
+    uploadFile();
+    AsAPI.addArtist({ artist_name_TH, artist_name_EN, artist_picture })
       .then((resp) => resp.json())
       .then((resp) => console.log(resp))
       .catch((error) => {
@@ -73,7 +74,7 @@ const ArtistAdd = ({ navigation }) => {
       <View>
         <View style={{ alignSelf: "center", marginTop: 7, marginBottom: 7 }}>
           {image ? (
-            <TouchableOpacity style={style.addphoto_button} onPress={pickImage}>
+            <TouchableOpacity onPress={pickImage}>
               <Image
                 style={style.addphoto_button}
                 source={{
@@ -142,8 +143,6 @@ const style = StyleSheet.create({
     },
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
-
-    elevation: 5,
   },
   text_input: {
     marginTop: 7,
@@ -173,7 +172,6 @@ const style = StyleSheet.create({
     },
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
-    elevation: 5,
   },
 });
 export default ArtistAdd;
