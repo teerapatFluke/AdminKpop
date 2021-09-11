@@ -4,6 +4,9 @@ import EventMenu from "./EventMenu";
 import EventAdd from "./EventAdd";
 import EventList from "./EventList";
 import EventTicket from "./EventTicket";
+import EventVenue from "./EventVenue";
+import EventPromoter from "./EventPromoter";
+import EventEdit from "./EventEdit";
 const Stack = createStackNavigator();
 const StackManageEvent = () => {
   return (
@@ -29,6 +32,17 @@ const StackManageEvent = () => {
         component={EventTicket}
         options={{ headerTitle: "ช่องทางการซื้อบัตร" }}
       />
+      <Stack.Screen
+        name="จัดการข้อมูลสถานที่จัด"
+        component={EventVenue}
+        options={{ headerTitle: "สถานที่จัด" }}
+      />
+      <Stack.Screen
+        name="จัดการข้อมูลตัวแทนจัด"
+        component={EventPromoter}
+        options={{ headerTitle: "ตัวแทนจัด" }}
+      />
+      <Stack.Screen name="แก้ไขข้อมูลอีเว้นท์" component={EventEdit} />
     </Stack.Navigator>
   );
 };

@@ -18,7 +18,7 @@ import {
   Provider,
   FAB,
 } from "react-native-paper";
-import { NavigationContainer, useIsFocused } from "@react-navigation/native";
+import { useIsFocused } from "@react-navigation/native";
 import { AsAPI } from "./Artist-api";
 const ArtistMenu = ({ navigation }) => {
   const [visible, setVisible] = useState(false);
@@ -124,7 +124,6 @@ const ArtistMenu = ({ navigation }) => {
       <Portal>
         <Dialog visible={visible} onDismiss={hideDialog}>
           <Dialog.Title>
-            {" "}
             <Text style={styles.artist_name}>จัดการข้อมูลศิลปิน</Text>
           </Dialog.Title>
           <Dialog.Content>

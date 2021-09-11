@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, Text, TouchableOpacity, StyleSheet, Image } from "react-native";
 import { Avatar, Provider, TextInput, Button } from "react-native-paper";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
@@ -13,6 +13,7 @@ const ArtistAdd = ({ navigation }) => {
   const [image, setImage] = useState("");
   const [imgName, setImageName] = useState("");
   const [artist_picture, setArtist_picture] = useState("");
+
   const pickImage = async () => {
     let name = moment().format("MMMMDoYYYYhmmssa");
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -30,7 +31,21 @@ const ArtistAdd = ({ navigation }) => {
       );
     }
   };
-
+  const [Amazon, setAmazon] = useState({});
+  useEffect(() => {
+    let isMounted = true;
+    if (isMounted) {
+      AsAPI.getAmazon()
+        .then((resp) => resp.json())
+        .then((resp) => setAmazon(resp))
+        .catch((error) => {
+          console.error(error);
+        });
+    }
+    return () => {
+      isMounted = false;
+    };
+  }, []);
   const uploadFile = () => {
     if (Object.keys(image).length == 0) {
       alert("Please select image first");
@@ -46,8 +61,8 @@ const ArtistAdd = ({ navigation }) => {
         keyPrefix: "",
         bucket: "kpop1",
         region: "ap-southeast-1",
-        accessKey: "AKIA476CQJMRSGHUTNRE",
-        secretKey: "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",
+        accessKey: Amazon.accessKey,
+        secretKey: Amazon.secretKey,
         successActionStatus: 201,
       }
     ).then((response) => {

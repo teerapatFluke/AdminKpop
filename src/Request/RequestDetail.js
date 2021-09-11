@@ -24,15 +24,20 @@ const RequestDetail = () => {
 
   return (
     <View style={{ flex: 1 }}>
-      <Text_Detail header="ผู้ส่งคำขอ" detail="detail"></Text_Detail>
-      <Text_Detail header="ประเภทคำขอ" detail="detail"></Text_Detail>
-      <Text_Detail header="หัวข้อ" detail="detail"></Text_Detail>
-      <Text_Detail header="วันที่ส่ง" detail="detail"></Text_Detail>
+      <Text_Detail header="ผู้ส่งคำขอ" detail="ผู้ส่งคำขอ"></Text_Detail>
+      <Text_Detail header="ประเภทคำขอ" detail="ร้องขอศิลปิน"></Text_Detail>
+      <Text_Detail
+        header="หัวข้อ"
+        detail="ขอให้เพิ่มศิลปิน Davichi"
+      ></Text_Detail>
+      <Text_Detail header="วันที่ส่ง" detail="18/09/2021"></Text_Detail>
       <View style={{ marginTop: 7, marginLeft: 14 }}>
         <Text style={Style.text_400}>รายละเอียด</Text>
       </View>
       <View style={{ marginTop: 7, marginLeft: 14 }}>
-        <Text style={Style.text_200}>รายละเอียด</Text>
+        <Text style={Style.text_200}>
+          ขอให้เพิ่มศิลปิน DUO Davichi จากค่าย CJ E&M
+        </Text>
       </View>
     </View>
   );

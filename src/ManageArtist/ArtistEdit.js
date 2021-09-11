@@ -15,15 +15,28 @@ const ArtistEdit = ({ route, navigation }) => {
   const [image, setImage] = useState("");
   const [imgName, setImageName] = useState("");
   const [artist_picture, setArtist_picture] = useState("");
-  useEffect(() => {
-    AsAPI.getArtistID(id)
-      .then((resp) => resp.json())
-      .then((resp) => setartist(resp))
-      .catch((error) => {
-        console.error(error);
-      });
-  }, [id]);
+  const [Amazon, setAmazon] = useState({});
 
+  useEffect(() => {
+    let isMounted = true;
+    if (isMounted) {
+      AsAPI.getArtistID(id)
+        .then((resp) => resp.json())
+        .then((resp) => setartist(resp))
+        .catch((error) => {
+          console.error(error);
+        });
+      AsAPI.getAmazon()
+        .then((resp) => resp.json())
+        .then((resp) => setAmazon(resp))
+        .catch((error) => {
+          console.error(error);
+        });
+    }
+    return () => {
+      isMounted = false;
+    };
+  }, [id]);
   useEffect(() => {
     if (artist !== []) {
       setTH(artist.artist_name_TH);
@@ -67,8 +80,8 @@ const ArtistEdit = ({ route, navigation }) => {
         keyPrefix: "",
         bucket: "kpop1",
         region: "ap-southeast-1",
-        accessKey: "AKIA476CQJMRSGHUTNRE",
-        secretKey: "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",
+        accessKey: Amazon.accessKey,
+        secretKey: Amazon.secretKey,
         successActionStatus: 201,
       }
     ).then((response) => {

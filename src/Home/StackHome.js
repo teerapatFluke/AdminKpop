@@ -1,12 +1,12 @@
 import React from "react";
 import { View, Text } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
-import Request from "./Request";
-import RequestDetail from "./RequestDetail";
+import Home from "./Home";
 import EventEdit from "../ManageEvent/EventEdit";
 import EventList from "../ManageEvent/EventMenu";
 const Stack = createStackNavigator();
-const StackRequest = () => {
+
+const StackHome = () => {
   return (
     <Stack.Navigator
       screenOptions={{
@@ -22,13 +22,9 @@ const StackRequest = () => {
         headerBackTitleStyle: { fontFamily: "Kanit_400Regular" },
       }}
     >
-      <Stack.Screen name="หน้าหลัก" component={Request} />
-      <Stack.Screen
-        name="รายละเอียดคำขอ"
-        component={RequestDetail}
-      ></Stack.Screen>
+      <Stack.Screen name="หน้าหลัก" component={Home} />
     </Stack.Navigator>
   );
 };
 
-export default StackRequest;
+export default StackHome;

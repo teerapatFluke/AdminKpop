@@ -10,7 +10,8 @@ import {
 import { Card } from "react-native-paper";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import Style from "../Style";
-const EventMenu = ({ navigation }) => {
+
+const EventMenu = ({ route, navigation }) => {
   const MenuCard = ({ name }) => {
     return (
       <TouchableOpacity onPress={() => navigation.navigate(name)}>
@@ -32,6 +33,8 @@ const EventMenu = ({ navigation }) => {
     <ScrollView>
       <MenuCard name="จัดการข้อมูลอีเว้นท์"></MenuCard>
       <MenuCard name="จัดการข้อมูลช่องทางการซื้อบัตร"></MenuCard>
+      <MenuCard name="จัดการข้อมูลสถานที่จัด"></MenuCard>
+      <MenuCard name="จัดการข้อมูลตัวแทนจัด"></MenuCard>
     </ScrollView>
   );
 };

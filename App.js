@@ -8,7 +8,9 @@ import StackManageArtist from "./src/ManageArtist/StackManageArtist";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import Entypo from "react-native-vector-icons/Entypo";
-import StackManageEvent from "./src/MamagerEvent/StackManageEvent";
+import StackManageEvent from "./src/ManageEvent/StackManageEvent";
+import IconBadge from "react-native-icon-badge";
+import { Badge } from "react-native-paper";
 import {
   useFonts,
   Kanit_400Regular,
@@ -16,6 +18,8 @@ import {
   Kanit_300Light,
 } from "@expo-google-fonts/kanit";
 import AppLoading from "expo-app-loading";
+import StackHome from "./src/Home/StackHome";
+import { View, Text } from "react-native";
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
@@ -29,7 +33,28 @@ const App = () => {
   if (!fontsLoaded) {
     return <AppLoading />;
   }
-
+  const IconBange = () => {
+    return (
+      <View>
+        <IconBadge
+          MainElement={<Entypo name="list" size={30} />}
+          BadgeElement={<Text style={{ color: "#FFFFFF" }}>3</Text>}
+          IconBadgeStyle={{
+            position: "absolute",
+            top: -5,
+            right: -9,
+            minWidth: 20,
+            height: 20,
+            borderRadius: 10,
+            alignItems: "center",
+            justifyContent: "center",
+            backgroundColor: "#FF0000",
+          }}
+          //Hidden={this.state.BadgeCount == 0}
+        />
+      </View>
+    );
+  };
   return (
     <NavigationContainer>
       <Tab.Navigator
@@ -37,9 +62,12 @@ const App = () => {
           tabBarIcon: ({ color, size }) => {
             let iconName;
 
-            if (route.name === "TabRequest") {
-              iconName = "list";
+            if (route.name === "TabHome") {
+              iconName = "home";
               return <Entypo name={iconName} size={size} color={color} />;
+            } else if (route.name === "TabRequest") {
+              iconName = "list";
+              return <IconBange />;
             } else if (route.name === "TabArtist") {
               iconName = "modern-mic";
               return <Entypo name={iconName} size={size} color={color} />;
@@ -66,8 +94,9 @@ const App = () => {
           inactiveBackgroundColor: "#5D99C6",
         }}
       >
+        <Tab.Screen name="TabHome" component={StackHome} />
         <Tab.Screen name="TabRequest" component={StackRequest} />
-        {/* <Tab.Screen name="Home" component={StackMenu} /> */}
+
         <Tab.Screen name="TabArtist" component={StackManageArtist} />
         <Tab.Screen name="TabEvents" component={StackManageEvent} />
 

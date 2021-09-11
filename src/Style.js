@@ -46,7 +46,12 @@ export default StyleSheet.create({
     fontFamily: "Kanit_300Light",
     color: "#000",
   },
-  text_status: {
+  text_status_unfinish: {
+    fontSize: 14,
+    fontFamily: "Kanit_200ExtraLight",
+    color: "#FA3A3A",
+  },
+  text_status_finish: {
     fontSize: 14,
     fontFamily: "Kanit_200ExtraLight",
   },
@@ -55,7 +60,7 @@ export default StyleSheet.create({
     fontFamily: "Kanit_400Regular",
     color: "#000",
     marginTop: 7,
-    marginLeft: 14,
+    marginLeft: 15,
   },
   drop_down: {
     marginHorizontal: 14,
@@ -67,10 +72,27 @@ export default StyleSheet.create({
     marginTop: 7,
     marginHorizontal: 14,
     justifyContent: "center",
+    fontFamily: "Kanit_400Regular",
+    fontSize: 18,
+  },
+  text_list: {
+    marginLeft: 7,
+    justifyContent: "center",
+    fontFamily: "Kanit_400Regular",
+    fontSize: 18,
   },
   text_input_date: {
     marginTop: 7,
     marginLeft: 14,
+    justifyContent: "center",
+    fontFamily: "Kanit_400Regular",
+    fontSize: 18,
+  },
+  picker: {
+    flex: 1,
+    marginHorizontal: 14,
+    height: 45,
+    backgroundColor: "#E5E5E5",
     justifyContent: "center",
   },
 });
