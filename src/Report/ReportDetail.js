@@ -2,19 +2,19 @@ import React, { useEffect, useState, useCallback } from "react";
 import { View, Text } from "react-native";
 import Style from "../Style";
 import { useFocusEffect } from "@react-navigation/native";
-import { API } from "./RequestAPI";
-const RequestDetail = ({ route }) => {
-  const [request, setRequest] = useState({});
+import { API } from "./ReportAPI";
+
+const ReportDetail = ({ route }) => {
+  const [problem, setProblem] = useState({});
   const { id } = route.params;
   const fetachdata = () => {
-    API.getRequestID(id)
+    API.getReportID(id)
       .then((resp) => resp.json())
-      .then((resp) => setRequest(resp))
+      .then((resp) => setProblem(resp))
       .catch((error) => {
         console.error(error);
       });
   };
-
   useFocusEffect(
     useCallback(() => {
       let isMounted = true;
@@ -49,36 +49,25 @@ const RequestDetail = ({ route }) => {
 
   return (
     <View style={{ flex: 1 }}>
-      {request ? (
+      {problem ? (
         <View style={{ flex: 1 }}>
           <Text_Detail
             header="หมายเลขผู้ส่งคำขอ"
-            detail={request.newuser}
+            detail={problem.newuser}
           ></Text_Detail>
-          {request.request_type == 1 ? (
-            <Text_Detail
-              header="ประเภทคำขอ"
-              detail="ร้องขอศิลปิน"
-            ></Text_Detail>
-          ) : (
-            <Text_Detail
-              header="ประเภทคำขอ"
-              detail="ร้องขออีเว้นท์"
-            ></Text_Detail>
-          )}
           <Text_Detail
             header="หัวข้อ"
-            detail={request.request_header}
+            detail={problem.problem_head}
           ></Text_Detail>
           <Text_Detail
             header="วันที่ส่ง"
-            detail={request.request_date}
+            detail={problem.problem_date}
           ></Text_Detail>
           <View style={{ marginTop: 7, marginLeft: 14 }}>
             <Text style={Style.text_400}>รายละเอียด</Text>
           </View>
           <View style={{ marginTop: 7, marginLeft: 14 }}>
-            <Text style={Style.text_200}>{request.request_detail}</Text>
+            <Text style={Style.text_200}>{problem.problem_detail}</Text>
           </View>
         </View>
       ) : null}
@@ -86,4 +75,4 @@ const RequestDetail = ({ route }) => {
   );
 };
 
-export default RequestDetail;
+export default ReportDetail;

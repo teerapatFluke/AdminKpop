@@ -2,21 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6b2d8adf-7c66-44b7-b5b3-c6e668063458" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/Report/StackReport.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.json" beforeDir="false" afterPath="$PROJECT_DIR$/app.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/MamagerEvent/EventAdd.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/MamagerEvent/EventList.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/MamagerEvent/EventMenu.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/MamagerEvent/EventTicket.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/MamagerEvent/StackManageEvent.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Home/Home.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Home/Home.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Home/StackHome.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Home/StackHome.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ManageArtist/Artist-api.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/ManageArtist/Artist-api.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ManageArtist/ArtistMenu.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/ManageArtist/ArtistMenu.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ManageEvent/EventAPI.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/ManageEvent/EventAPI.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Request/Request.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Request/Request.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Request/RequestAPI.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Request/RequestAPI.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Request/RequestDetail.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Request/RequestDetail.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Request/StackRequest.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Request/StackRequest.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Style.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Style.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,11 +49,12 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
-    <state x="192" y="58" width="1720" height="861" key="AVDManager" timestamp="1631391849983">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="-2105" y="-254" width="1720" height="861" key="AVDManager" timestamp="1632617959603">
+      <screen x="-1920" y="-361" width="1920" height="1040" />
     </state>
     <state x="100" y="103" width="1720" height="827" key="AVDManager/0.0.1920.1040/-1024.305.1024.728@0.0.1920.1040" timestamp="1629503399916" />
-    <state x="192" y="58" width="1720" height="861" key="AVDManager/0.0.1920.1040/-1920.-361.1920.1040@0.0.1920.1040" timestamp="1631391849983" />
+    <state x="-2105" y="-254" width="1720" height="861" key="AVDManager/0.0.1920.1040/-1920.-361.1920.1040@-1920.-361.1920.1040" timestamp="1632617959603" />
+    <state x="192" y="58" width="1720" height="861" key="AVDManager/0.0.1920.1040/-1920.-361.1920.1040@0.0.1920.1040" timestamp="1632304425136" />
     <state x="100" y="69" width="1720" height="861" key="AVDManager/0.0.1920.1040@0.0.1920.1040" timestamp="1629532915806" />
   </component>
 </project>

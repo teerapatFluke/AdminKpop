@@ -9,18 +9,15 @@ import {
 } from "react-native";
 import { Card, Button, Provider, Divider } from "react-native-paper";
 import Style from "../Style";
-import jwt_decode from "jwt-decode";
 import { useFocusEffect } from "@react-navigation/native";
-import { API } from "./RequestAPI";
-const Request = ({ navigation }) => {
-  const [request, setRequest] = useState(null);
-  const [isEvent, setIsEvent] = useState(false);
-  const [eventList, setEventList] = useState([]);
+import { API } from "./ReportAPI";
+const Report = ({ navigation }) => {
+  const [problem, setProblem] = useState(null);
   const [id, setID] = useState(0);
   const fetachdata = () => {
-    API.getRequest()
+    API.getReport()
       .then((resp) => resp.json())
-      .then((resp) => setRequest(resp))
+      .then((resp) => setProblem(resp))
       .catch((error) => {
         console.error(error);
       });
@@ -37,15 +34,14 @@ const Request = ({ navigation }) => {
       };
     }, [])
   );
-
   useEffect(() => {
     let isMounted = true;
     if (isMounted && id !== 0) {
-      API.requestRead(id)
+      API.reportRead(id)
         .then((resp) => resp.json())
         .then((resp) => console.log(resp))
         .then(() =>
-          navigation.navigate("รายละเอียดคำขอ", {
+          navigation.navigate("รายละเอียดปัญหา", {
             id: id,
           })
         )
@@ -58,14 +54,14 @@ const Request = ({ navigation }) => {
       setID(0);
     };
   }, [id]);
-  const RequestCard = ({ name, date, id, read }) => {
+  const ReportCard = ({ name, date, id, read }) => {
     return (
       <View>
         {read == 0 ? (
           <TouchableOpacity onPress={() => setID(id)}>
             <Card style={styles.request}>
               <Card.Content style={{ flex: 1, flexDirection: "row" }}>
-                <View style={{ flex: 2.8, justifyContent: "center" }}>
+                <View style={{ flex: 2.7, justifyContent: "center" }}>
                   <Text style={Style.text_400}>{name}</Text>
                 </View>
                 <View
@@ -75,7 +71,7 @@ const Request = ({ navigation }) => {
                     justifyContent: "center",
                   }}
                 >
-                  <Text style={Style.text_400}>{date}</Text>
+                  <Text style={Style.text_400}>2021-09-22</Text>
                 </View>
               </Card.Content>
             </Card>
@@ -83,14 +79,14 @@ const Request = ({ navigation }) => {
         ) : (
           <TouchableOpacity
             onPress={() =>
-              navigation.navigate("รายละเอียดคำขอ", {
+              navigation.navigate("รายละเอียดปัญหา", {
                 id: id,
               })
             }
           >
             <Card style={styles.request}>
               <Card.Content style={{ flex: 1, flexDirection: "row" }}>
-                <View style={{ flex: 2.7, justifyContent: "center" }}>
+                <View style={{ flex: 1, justifyContent: "center" }}>
                   <Text style={Style.text_200}>{name}</Text>
                 </View>
                 <View
@@ -112,7 +108,7 @@ const Request = ({ navigation }) => {
 
   return (
     <Provider>
-      {request ? (
+      {problem ? (
         <View style={{ flex: 1 }}>
           <View style={{ flex: 1 }}>
             <View style={{ marginHorizontal: 7, marginTop: 7 }}>
@@ -123,14 +119,14 @@ const Request = ({ navigation }) => {
                 flex: 1,
               }}
             >
-              {request.map((item) => (
-                <RequestCard
+              {problem.map((item) => (
+                <ReportCard
                   id={item.id}
                   key={item.id}
-                  name={item.request_header}
-                  date={item.request_date}
-                  read={item.request_read}
-                ></RequestCard>
+                  name={item.problem_head}
+                  date={item.problem_date}
+                  read={item.problem_read}
+                ></ReportCard>
               ))}
             </ScrollView>
           </View>
@@ -139,7 +135,6 @@ const Request = ({ navigation }) => {
     </Provider>
   );
 };
-
 const styles = StyleSheet.create({
   request: {
     backgroundColor: "#fff",
@@ -161,4 +156,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Request;
+export default Report;

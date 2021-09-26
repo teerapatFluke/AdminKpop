@@ -7,9 +7,11 @@ import StackRequest from "./src/Request/StackRequest";
 import StackManageArtist from "./src/ManageArtist/StackManageArtist";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
+import StackReport from "./src/Report/StackReport";
 import Entypo from "react-native-vector-icons/Entypo";
 import StackManageEvent from "./src/ManageEvent/StackManageEvent";
 import IconBadge from "react-native-icon-badge";
+import { Aumber } from "./src/Data";
 import { Badge } from "react-native-paper";
 import {
   useFonts,
@@ -33,28 +35,7 @@ const App = () => {
   if (!fontsLoaded) {
     return <AppLoading />;
   }
-  const IconBange = () => {
-    return (
-      <View>
-        <IconBadge
-          MainElement={<Entypo name="list" size={30} />}
-          BadgeElement={<Text style={{ color: "#FFFFFF" }}>3</Text>}
-          IconBadgeStyle={{
-            position: "absolute",
-            top: -5,
-            right: -9,
-            minWidth: 20,
-            height: 20,
-            borderRadius: 10,
-            alignItems: "center",
-            justifyContent: "center",
-            backgroundColor: "#FF0000",
-          }}
-          //Hidden={this.state.BadgeCount == 0}
-        />
-      </View>
-    );
-  };
+
   return (
     <NavigationContainer>
       <Tab.Navigator
@@ -65,9 +46,9 @@ const App = () => {
             if (route.name === "TabHome") {
               iconName = "home";
               return <Entypo name={iconName} size={size} color={color} />;
-            } else if (route.name === "TabRequest") {
-              iconName = "list";
-              return <IconBange />;
+            } else if (route.name === "TabBug") {
+              iconName = "bug";
+              return <Entypo name={iconName} size={size} color={color} />;
             } else if (route.name === "TabArtist") {
               iconName = "modern-mic";
               return <Entypo name={iconName} size={size} color={color} />;
@@ -76,9 +57,9 @@ const App = () => {
               return (
                 <MaterialIcons name={iconName} size={size} color={color} />
               );
-            } else if (route.name === "TabBug") {
-              iconName = "bug";
-              return <Entypo name={iconName} size={size} color={color} />;
+            } else if (route.name === "TabRequest") {
+              iconName = "list";
+              return <Aumber />;
             }
 
             // You can return any component that you like here!
@@ -95,12 +76,12 @@ const App = () => {
         }}
       >
         <Tab.Screen name="TabHome" component={StackHome} />
-        <Tab.Screen name="TabRequest" component={StackRequest} />
 
         <Tab.Screen name="TabArtist" component={StackManageArtist} />
         <Tab.Screen name="TabEvents" component={StackManageEvent} />
+        <Tab.Screen name="TabRequest" component={StackRequest} />
 
-        <Tab.Screen name="TabBug" component={StackRequest} />
+        <Tab.Screen name="TabBug" component={StackReport} />
       </Tab.Navigator>
     </NavigationContainer>
   );

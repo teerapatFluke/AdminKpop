@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState, useRef } from "react";
 import {
   View,
   Text,
@@ -12,8 +12,15 @@ import Style from "../Style";
 import jwt_decode from "jwt-decode";
 import { useFocusEffect } from "@react-navigation/native";
 import { API } from "../Request/RequestAPI";
+import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
 
 const Home = ({ navigation }) => {
+  const ref = useRef();
+
+  useEffect(() => {
+    ref.current?.setAddressText("Some Text");
+  }, []);
+
   const [event, setEvent] = useState(null);
   const [isEvent, setIsEvent] = useState(false);
   const [eventList, setEventList] = useState([]);
@@ -37,29 +44,6 @@ const Home = ({ navigation }) => {
       };
     }, [])
   );
-
-  const RequestCard = () => {
-    return (
-      <TouchableOpacity onPress={() => navigation.navigate("รายละเอียดคำขอ")}>
-        <Card style={styles.request}>
-          <Card.Content style={{ flex: 1, flexDirection: "row" }}>
-            <View style={{ flex: 3, justifyContent: "center" }}>
-              <Text style={Style.text_400}>Artist</Text>
-            </View>
-            <View
-              style={{
-                flex: 1,
-                alignItems: "flex-end",
-                justifyContent: "center",
-              }}
-            >
-              <Text style={Style.text_400}>Artist</Text>
-            </View>
-          </Card.Content>
-        </Card>
-      </TouchableOpacity>
-    );
-  };
 
   const EventCard = ({ event_name, selectedEvent, date_lastupdate }) => {
     return (
@@ -121,8 +105,6 @@ const Home = ({ navigation }) => {
             console.log("null")
           )}
         </View>
-
-        <Divider style={{ borderWidth: 0.2, marginHorizontal: 7 }}></Divider>
       </View>
     </Provider>
   );

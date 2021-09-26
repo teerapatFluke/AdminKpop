@@ -22,7 +22,7 @@ const StackRequest = () => {
         headerBackTitleStyle: { fontFamily: "Kanit_400Regular" },
       }}
     >
-      <Stack.Screen name="หน้าหลัก" component={Request} />
+      <Stack.Screen name="รายการร้องขอ" component={Request} />
       <Stack.Screen
         name="รายละเอียดคำขอ"
         component={RequestDetail}
