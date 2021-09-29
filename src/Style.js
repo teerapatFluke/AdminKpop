@@ -10,6 +10,12 @@ export default StyleSheet.create({
   text_200: {
     fontSize: 18,
     fontFamily: "Kanit_200ExtraLight",
+    color: "#000",
+  },
+  text_200_head: {
+    fontSize: 16,
+    fontFamily: "Kanit_400Regular",
+    color: "#000",
   },
   Add_Button: {
     width: 144,

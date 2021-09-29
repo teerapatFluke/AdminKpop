@@ -101,9 +101,7 @@ const Home = ({ navigation }) => {
                 </ScrollView>
               )}
             />
-          ) : (
-            console.log("null")
-          )}
+          ) : null}
         </View>
       </View>
     </Provider>

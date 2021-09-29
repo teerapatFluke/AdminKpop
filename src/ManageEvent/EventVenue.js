@@ -30,15 +30,22 @@ const EventVenue = () => {
   const [name, setname] = useState("");
   const [id, setid] = useState("");
   const [isUpdate, setisUpdate] = useState(false);
+  const [prediction, setPrediction] = useState(null);
+  const [mapname, setMapname] = useState("");
+  const [mapurl, setMapurl] = useState("");
+  let apikey = "AIzaSyCAXUwhuh-byreLAy1POMQAcLAiNWEaHvM";
+
   const showDialogadd = () => {
     setVisibleadd(true);
     setname("");
   };
 
   const hideDialogadd = () => setVisibleadd(false);
-  const showDialogedit = (name, id) => {
+  const showDialogedit = (name, id, map, url) => {
     setVisibleedit(true);
     setname(name);
+    setMapname(map);
+    setMapurl(url);
     setid(id);
   };
 
@@ -74,7 +81,7 @@ const EventVenue = () => {
   }, [isUpdate]);
 
   const addVenue = () => {
-    EvAPI.addVenue({ name })
+    EvAPI.addVenue({ name, mapname, mapurl })
       .then((resp) => resp.json())
       .then(() => setisUpdate(true))
       .then(() => setVisibleadd(false))
@@ -84,7 +91,7 @@ const EventVenue = () => {
   };
 
   const editVenue = () => {
-    EvAPI.editVenue({ name }, id)
+    EvAPI.editVenue({ name, mapname, mapurl }, id)
       .then((resp) => resp.json())
       .then(() => setVisibleedit(false))
       .then(() => setisUpdate(true))
@@ -102,9 +109,9 @@ const EventVenue = () => {
         console.error(error);
       });
   };
-  const MenuCard = ({ name, id }) => {
+  const MenuCard = ({ name, id, map, url }) => {
     return (
-      <TouchableOpacity onPress={() => showDialogedit(name, id)}>
+      <TouchableOpacity onPress={() => showDialogedit(name, id, map, url)}>
         <Card style={styles.event}>
           <Card.Content style={{ flex: 1, flexDirection: "row" }}>
             <View style={{ alignSelf: "center", flex: 1 }}>
@@ -115,7 +122,26 @@ const EventVenue = () => {
       </TouchableOpacity>
     );
   };
+  const [showSearch, setshowSearch] = useState(false);
+  const onChangeA = (text) => {
+    setMapname(text);
+    setshowSearch(true);
+    const apiUrl = `https://maps.googleapis.com/maps/api/place/autocomplete/json?key=${apikey}&input=${text}&language=th&components=country:th`;
+    fetch(apiUrl)
+      .then((resp) => resp.json())
+      .then((resp) => setPrediction(resp.predictions));
+  };
+  const placeSelected = (id, description) => {
+    console.log(id);
+    console.log(description);
+    const apiUrl = `https://maps.googleapis.com/maps/api/place/details/json?placeid=${id}&key=${apikey}&language=th&fields=url`;
+    fetch(apiUrl)
+      .then((resp) => resp.json())
+      .then((resp) => setMapurl(resp.result.url));
 
+    setMapname(description);
+    setshowSearch(false);
+  };
   return (
     <Provider>
       <FlatList
@@ -123,7 +149,12 @@ const EventVenue = () => {
         keyExtractor={(item) => item.id.toString()}
         renderItem={({ item }) => (
           <ScrollView>
-            <MenuCard name={item.name} id={item.id.toString()}></MenuCard>
+            <MenuCard
+              name={item.name}
+              id={item.id.toString()}
+              map={item.mapname}
+              url={item.mapurl}
+            ></MenuCard>
           </ScrollView>
         )}
       />
@@ -137,10 +168,48 @@ const EventVenue = () => {
       />
       <Dialog visible={visibleadd} onDismiss={hideDialogadd}>
         <Dialog.Title>
-          <Text style={Style.text_400}>ช่องทางการซื้อบัตร</Text>
+          <Text style={Style.text_400}>สถานที่จัด</Text>
         </Dialog.Title>
         <Dialog.Content>
-          <TextInput value={name} onChangeText={(text) => setname(text)} />
+          <View style={{ marginBottom: 7 }}>
+            <Text style={Style.text_200_head}>ชื่อสถานที่จัด</Text>
+          </View>
+          <View style={{ marginBottom: 7 }}>
+            <TextInput
+              style={{ height: 40 }}
+              value={name}
+              onChangeText={(text) => setname(text)}
+            />
+          </View>
+          <View style={{ marginBottom: 7 }}>
+            <Text style={Style.text_200_head}>Google Map</Text>
+          </View>
+          <View style={{ marginBottom: 7 }}>
+            <TextInput
+              style={{ height: 40 }}
+              value={mapname}
+              onChangeText={(text) => onChangeA(text)}
+            />
+          </View>
+          {prediction && showSearch ? (
+            <ScrollView>
+              {prediction.map((item) => (
+                <TouchableOpacity
+                  onPress={() => placeSelected(item.place_id, item.description)}
+                >
+                  <View
+                    style={{
+                      marginLeft: 5,
+                      borderBottomWidth: 1,
+                      marginHorizontal: 15,
+                    }}
+                  >
+                    <Text key={item.place_idasd}>{item.description}</Text>
+                  </View>
+                </TouchableOpacity>
+              ))}
+            </ScrollView>
+          ) : null}
         </Dialog.Content>
         <Dialog.Actions
           style={{
@@ -161,7 +230,45 @@ const EventVenue = () => {
           <Text style={Style.text_400}>ช่องทางการซื้อบัตร</Text>
         </Dialog.Title>
         <Dialog.Content>
-          <TextInput value={name} onChangeText={(text) => setname(text)} />
+          <View style={{ marginBottom: 7 }}>
+            <Text style={Style.text_200_head}>ชื่อสถานที่จัด</Text>
+          </View>
+          <View style={{ marginBottom: 7 }}>
+            <TextInput
+              style={{ height: 40 }}
+              value={name}
+              onChangeText={(text) => setname(text)}
+            />
+          </View>
+          <View style={{ marginBottom: 7 }}>
+            <Text style={Style.text_200_head}>Google Map</Text>
+          </View>
+          <View style={{ marginBottom: 7 }}>
+            <TextInput
+              style={{ height: 40 }}
+              value={mapname}
+              onChangeText={(text) => onChangeA(text)}
+            />
+          </View>
+          {prediction && showSearch ? (
+            <ScrollView>
+              {prediction.map((item) => (
+                <TouchableOpacity
+                  onPress={() => placeSelected(item.place_id, item.description)}
+                >
+                  <View
+                    style={{
+                      marginLeft: 5,
+                      borderBottomWidth: 1,
+                      marginHorizontal: 15,
+                    }}
+                  >
+                    <Text key={item.id}>{item.description}</Text>
+                  </View>
+                </TouchableOpacity>
+              ))}
+            </ScrollView>
+          ) : null}
         </Dialog.Content>
         <Dialog.Actions
           style={{

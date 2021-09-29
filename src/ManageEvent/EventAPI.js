@@ -1,6 +1,6 @@
 export class EvAPI {
   static addTicket(body) {
-    return fetch("http://192.168.1.13:80/api/ticket/", {
+    return fetch("http://192.168.1.4:80/api/ticket/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -9,7 +9,7 @@ export class EvAPI {
     });
   }
   static getTicket() {
-    return fetch("http://192.168.1.13:80/api/ticket/", {
+    return fetch("http://192.168.1.4:80/api/ticket/", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -17,7 +17,7 @@ export class EvAPI {
     });
   }
   static editTicket(body, id) {
-    return fetch(`http://192.168.1.13:80/api/ticket/${id}/`, {
+    return fetch(`http://192.168.1.4:80/api/ticket/${id}/`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -26,7 +26,7 @@ export class EvAPI {
     });
   }
   static deleteTicket(id) {
-    return fetch(`http://192.168.1.13:80/api/ticket/${id}/`, {
+    return fetch(`http://192.168.1.4:80/api/ticket/${id}/`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -34,7 +34,7 @@ export class EvAPI {
     });
   }
   static addVenue(body) {
-    return fetch("http://192.168.1.13:80/api/venue/", {
+    return fetch("http://192.168.1.4:80/api/venue/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -44,7 +44,7 @@ export class EvAPI {
   }
 
   static getVenue() {
-    return fetch("http://192.168.1.13:80/api/venue/", {
+    return fetch("http://192.168.1.4:80/api/venue/", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -52,7 +52,7 @@ export class EvAPI {
     });
   }
   static editVenue(body, id) {
-    return fetch(`http://192.168.1.13:80/api/venue/${id}/`, {
+    return fetch(`http://192.168.1.4:80/api/venue/${id}/`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -61,7 +61,7 @@ export class EvAPI {
     });
   }
   static deleteVenue(id) {
-    return fetch(`http://192.168.1.13:80/api/venue/${id}/`, {
+    return fetch(`http://192.168.1.4:80/api/venue/${id}/`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -70,7 +70,7 @@ export class EvAPI {
   }
 
   static addPromoter(body) {
-    return fetch("http://192.168.1.13:80/api/promoter/", {
+    return fetch("http://192.168.1.4:80/api/promoter/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -80,7 +80,7 @@ export class EvAPI {
   }
 
   static getPromoter() {
-    return fetch("http://192.168.1.13:80/api/promoter/", {
+    return fetch("http://192.168.1.4:80/api/promoter/", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -88,7 +88,7 @@ export class EvAPI {
     });
   }
   static editPromoter(body, id) {
-    return fetch(`http://192.168.1.13:80/api/promoter/${id}/`, {
+    return fetch(`http://192.168.1.4:80/api/promoter/${id}/`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -97,7 +97,7 @@ export class EvAPI {
     });
   }
   static deletePromoter(id) {
-    return fetch(`http://192.168.1.13:80/api/promoter/${id}/`, {
+    return fetch(`http://192.168.1.4:80/api/promoter/${id}/`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -105,7 +105,7 @@ export class EvAPI {
     });
   }
   static getArtist() {
-    return fetch("http://192.168.1.13:80/api/artist/", {
+    return fetch("http://192.168.1.4:80/api/artist/", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -113,7 +113,7 @@ export class EvAPI {
     });
   }
   static addEvent(body) {
-    return fetch("http://192.168.1.13:80/api/event/", {
+    return fetch("http://192.168.1.4:80/api/event/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -122,7 +122,7 @@ export class EvAPI {
     });
   }
   static addEventArtist(body) {
-    return fetch("http://192.168.1.13:80/api/artistev/", {
+    return fetch("http://192.168.1.4:80/api/artistev/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -131,7 +131,7 @@ export class EvAPI {
     });
   }
   static addEventTicket(body) {
-    return fetch("http://192.168.1.13:80/api/ticketev/", {
+    return fetch("http://192.168.1.4:80/api/ticketev/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -140,7 +140,7 @@ export class EvAPI {
     });
   }
   static getEvent() {
-    return fetch("http://192.168.1.13:80/api/event/", {
+    return fetch("http://192.168.1.4:80/api/event/", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -148,7 +148,7 @@ export class EvAPI {
     });
   }
   static editEvent(body, id) {
-    return fetch(`http://192.168.1.13:80/api/event/${id}/`, {
+    return fetch(`http://192.168.1.4:80/api/event/${id}/`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
