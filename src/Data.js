@@ -7,7 +7,7 @@ import { useIsFocused } from "@react-navigation/native";
 
 export function Aumber() {
   const [state, setRequest] = useState(0);
-  fetch("http://192.168.1.4:80/api/request/?request_read=0", {
+  fetch("http://192.168.1.8:8000/api/request/?request_read=0", {
     method: "GET",
     headers: {
       "Content-Type": "application/json",

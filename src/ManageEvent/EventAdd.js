@@ -350,15 +350,18 @@ const EventAdd = () => {
             </TouchableOpacity>
           </View>
         </View>
-        <DateTimePickerModal
-          isVisible={isDatePickerEndVisible}
-          mode="date"
-          onConfirm={handleConfirmEnd}
-          onCancel={hideDatePickerEnd}
-        />
+        <View>
+          <DateTimePickerModal
+            isVisible={isDatePickerEndVisible}
+            mode="date"
+            onConfirm={handleConfirmEnd}
+            onCancel={hideDatePickerEnd}
+          />
+        </View>
         <View style={{ flex: 1, flexDirection: "row" }}>
           <View style={{ flex: 1 }}>
             <TextInput
+              style={{ width: "100%" }}
               label="วันที่เริ่มขายบัตร"
               value={ticket_open}
               style={Style.text_input_date}
@@ -373,12 +376,14 @@ const EventAdd = () => {
             </TouchableOpacity>
           </View>
         </View>
-        <DateTimePickerModal
-          isVisible={isDatePickerOpenVisible}
-          mode="date"
-          onConfirm={handleConfirmOpen}
-          onCancel={hideDatePickerOpen}
-        />
+        <View>
+          <DateTimePickerModal
+            isVisible={isDatePickerOpenVisible}
+            mode="date"
+            onConfirm={handleConfirmOpen}
+            onCancel={hideDatePickerOpen}
+          />
+        </View>
         <Text style={Style.text_400_add}>ช่องทางการสั่งซื้อบัตร</Text>
         {ticket !== null ? (
           <View style={Style.picker}>

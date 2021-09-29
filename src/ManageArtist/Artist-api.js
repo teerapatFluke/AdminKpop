@@ -1,6 +1,6 @@
 export class AsAPI {
   static addArtist(body) {
-    return fetch("http://192.168.1.4:80/api/artist/", {
+    return fetch("http://192.168.1.8:8000/api/artist/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -9,7 +9,7 @@ export class AsAPI {
     });
   }
   static getArtist() {
-    return fetch("http://192.168.1.4:80/api/artist/", {
+    return fetch("http://192.168.1.8:8000/api/artist/", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -17,7 +17,7 @@ export class AsAPI {
     });
   }
   static getArtistID(id) {
-    return fetch(`http://192.168.1.4:80/api/artist/${id}/`, {
+    return fetch(`http://192.168.1.8:8000/api/artist/${id}/`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -25,7 +25,7 @@ export class AsAPI {
     });
   }
   static editArtist(id, body) {
-    return fetch(`http://192.168.1.4:80/api/artist/${id}/`, {
+    return fetch(`http://192.168.1.8:8000/api/artist/${id}/`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -34,7 +34,7 @@ export class AsAPI {
     });
   }
   static deleteArtist(id) {
-    return fetch(`http://192.168.1.4:80/api/artist/${id}/`, {
+    return fetch(`http://192.168.1.8:8000/api/artist/${id}/`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -42,7 +42,7 @@ export class AsAPI {
     });
   }
   static getAmazon() {
-    return fetch("http://192.168.1.4:80/api/amazon/1/", {
+    return fetch("http://192.168.1.8:8000/api/amazon/1/", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

@@ -1,6 +1,6 @@
 export class API {
   static getReport() {
-    return fetch("http://192.168.1.4:80/api/problem/", {
+    return fetch("http://192.168.1.8:8000/api/problem/", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -8,7 +8,7 @@ export class API {
     });
   }
   static reportRead(id) {
-    return fetch(`http://192.168.1.4:80/api/problem/${id}/problemread/`, {
+    return fetch(`http://192.168.1.8:8000/api/problem/${id}/problemread/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -16,7 +16,7 @@ export class API {
     });
   }
   static getReportID(id) {
-    return fetch(`http://192.168.1.4:80/api/problem/${id}/`, {
+    return fetch(`http://192.168.1.8:8000/api/problem/${id}/`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
