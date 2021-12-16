@@ -3,18 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="6b2d8adf-7c66-44b7-b5b3-c6e668063458" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Data.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Data.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Home/Home.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Home/Home.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Home/Test.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Home/Test.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ManageArtist/Artist-api.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/ManageArtist/Artist-api.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ManageEvent/EventAPI.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/ManageEvent/EventAPI.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ManageEvent/EventTicket.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/ManageEvent/EventTicket.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ManageEvent/EventVenue.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/ManageEvent/EventVenue.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Report/ReportAPI.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Report/ReportAPI.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Request/RequestAPI.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Request/RequestAPI.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Style.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Style.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

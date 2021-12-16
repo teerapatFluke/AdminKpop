@@ -13,12 +13,17 @@ const StackReport = () => {
         headerTitleStyle: {
           fontFamily: "Kanit_400Regular",
           fontSize: 24,
+          color: "white",
         },
         cardStyle: { backgroundColor: "#fff" },
         headerStyle: {
-          backgroundColor: "#90CAF9",
+          backgroundColor: "#2c2c2c",
         },
-        headerBackTitleStyle: { fontFamily: "Kanit_400Regular" },
+        headerBackTitleStyle: {
+          fontFamily: "Kanit_400Regular",
+          color: "white",
+        },
+        headerTintColor: "white",
       }}
     >
       <Stack.Screen name="รายการร้องเรียนปัญหา" component={Report} />

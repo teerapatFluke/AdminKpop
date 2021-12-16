@@ -6,6 +6,7 @@ import {
   StyleSheet,
   ScrollView,
   FlatList,
+  Platform,
 } from "react-native";
 import { Card, Button, Provider, Divider } from "react-native-paper";
 import Style from "../Style";
@@ -13,14 +14,9 @@ import jwt_decode from "jwt-decode";
 import { useFocusEffect } from "@react-navigation/native";
 import { API } from "../Request/RequestAPI";
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
-
+import moment from "moment";
+import "moment/locale/th";
 const Home = ({ navigation }) => {
-  const ref = useRef();
-
-  useEffect(() => {
-    ref.current?.setAddressText("Some Text");
-  }, []);
-
   const [event, setEvent] = useState(null);
   const [isEvent, setIsEvent] = useState(false);
   const [eventList, setEventList] = useState([]);
@@ -67,7 +63,7 @@ const Home = ({ navigation }) => {
             </View>
             <View style={{ flex: 1, justifyContent: "center" }}>
               <Text style={Style.text_status_finish}>
-                วันที่เพิ่มข้อมูลล่าสุด : {date_lastupdate}
+                วันที่เพิ่มข้อมูลล่าสุด : {moment(date_lastupdate).format("ll")}
               </Text>
             </View>
           </Card.Content>
@@ -79,7 +75,7 @@ const Home = ({ navigation }) => {
     <Provider>
       <View style={{ flex: 1 }}>
         <View style={{ flex: 1 }}>
-          <View style={{ marginHorizontal: 7, marginTop: 7 }}>
+          <View style={{ marginHorizontal: 14, marginTop: 7 }}>
             <Text style={Style.text_400}>อีเว้นท์ที่ข้อมูลไม่ครบถ้วน</Text>
           </View>
 

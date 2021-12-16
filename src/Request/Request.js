@@ -12,6 +12,8 @@ import Style from "../Style";
 import jwt_decode from "jwt-decode";
 import { useFocusEffect } from "@react-navigation/native";
 import { API } from "./RequestAPI";
+import moment from "moment";
+import "moment/locale/th";
 const Request = ({ navigation }) => {
   const [request, setRequest] = useState(null);
   const [isEvent, setIsEvent] = useState(false);
@@ -43,7 +45,6 @@ const Request = ({ navigation }) => {
     if (isMounted && id !== 0) {
       API.requestRead(id)
         .then((resp) => resp.json())
-        .then((resp) => console.log(resp))
         .then(() =>
           navigation.navigate("รายละเอียดคำขอ", {
             id: id,
@@ -63,9 +64,9 @@ const Request = ({ navigation }) => {
       <View>
         {read == 0 ? (
           <TouchableOpacity onPress={() => setID(id)}>
-            <Card style={styles.request}>
+            <Card style={[styles.request, { backgroundColor: "#E5E5E5" }]}>
               <Card.Content style={{ flex: 1, flexDirection: "row" }}>
-                <View style={{ flex: 2.8, justifyContent: "center" }}>
+                <View style={{ flex: 2.3, justifyContent: "center" }}>
                   <Text style={Style.text_400}>{name}</Text>
                 </View>
                 <View
@@ -75,7 +76,9 @@ const Request = ({ navigation }) => {
                     justifyContent: "center",
                   }}
                 >
-                  <Text style={Style.text_400}>{date}</Text>
+                  <Text style={Style.text_400}>
+                    {moment(date).format("ll")}
+                  </Text>
                 </View>
               </Card.Content>
             </Card>
@@ -90,8 +93,8 @@ const Request = ({ navigation }) => {
           >
             <Card style={styles.request}>
               <Card.Content style={{ flex: 1, flexDirection: "row" }}>
-                <View style={{ flex: 2.7, justifyContent: "center" }}>
-                  <Text style={Style.text_200}>{name}</Text>
+                <View style={{ flex: 2.3, justifyContent: "center" }}>
+                  <Text style={Style.text_400}>{name}</Text>
                 </View>
                 <View
                   style={{
@@ -100,7 +103,9 @@ const Request = ({ navigation }) => {
                     justifyContent: "center",
                   }}
                 >
-                  <Text style={Style.text_200}>{date}</Text>
+                  <Text style={Style.text_400}>
+                    {moment(date).format("ll")}
+                  </Text>
                 </View>
               </Card.Content>
             </Card>
@@ -115,7 +120,7 @@ const Request = ({ navigation }) => {
       {request ? (
         <View style={{ flex: 1 }}>
           <View style={{ flex: 1 }}>
-            <View style={{ marginHorizontal: 7, marginTop: 7 }}>
+            <View style={{ marginHorizontal: 14, marginTop: 7 }}>
               <Text style={Style.text_400}>รายการร้องขอ</Text>
             </View>
             <ScrollView

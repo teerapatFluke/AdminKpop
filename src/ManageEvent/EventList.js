@@ -26,6 +26,7 @@ const EventList = ({ navigation }) => {
   const [visible, setVisible] = useState(false);
   const [selectedName, setSelectedName] = useState("");
   const [selectedEvent, setSelectedEvent] = useState(null);
+  const [id, setId] = useState(0);
   const showDialog = ({ event_name, event_id }) => {
     setVisible(true);
     setSelectedName(event_name);
@@ -34,14 +35,35 @@ const EventList = ({ navigation }) => {
     });
 
     setSelectedEvent(result);
+    setId(event_id);
 
     // setAsSelectID(asid.toString());
   };
+  const [visible2, setVisible2] = useState(false);
+  const showDialog2 = () => {
+    setVisible2(true);
+  };
+
+  const hideDialog2 = () => setVisible2(false);
+  const [visible3, setVisible3] = useState(false);
+  const showDialog3 = () => {
+    setVisible3(true);
+  };
+
+  const hideDialog3 = () => setVisible3(false);
 
   const hideDialog = () => setVisible(false);
 
   const deleteEv = () => {
-    console.log("delete");
+    EvAPI.deleteEvent(id)
+      .then((res) => res.text()) // or res.json()
+      .then(() => refresh())
+      .then(() => {
+        showDialog2();
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
 
   const editEv = () => {
@@ -71,6 +93,9 @@ const EventList = ({ navigation }) => {
       };
     }, [])
   );
+  const refresh = () => {
+    fetchdata();
+  };
   const EventCard = ({ event_name, event_id, complete }) => {
     return (
       <TouchableOpacity onPress={() => showDialog({ event_name, event_id })}>
@@ -101,14 +126,6 @@ const EventList = ({ navigation }) => {
 
   return (
     <Provider style={{ flex: 1 }}>
-      
-      <Searchbar
-        placeholder="ค้นหาอีเว้นท์"
-        onChangeText={onChangeSearch}
-        value={searchQuery}
-        inputStyle={{ fontFamily: "Kanit_400Regular" }}
-        style={{ marginBottom: 7 }}
-      />
       <FlatList
         data={event}
         keyExtractor={(item) => item.id.toString()}
@@ -128,7 +145,7 @@ const EventList = ({ navigation }) => {
         icon="plus"
         size={100}
         onPress={() => navigation.navigate("เพิ่มข้อมูลอีเว้นท์")}
-        theme={{ colors: { accent: "#90CAF9" } }}
+        theme={{ colors: { accent: "#2c2c2c" } }}
       />
       <Portal>
         <Dialog visible={visible} onDismiss={hideDialog}>
@@ -143,11 +160,74 @@ const EventList = ({ navigation }) => {
               justifyContent: "center",
             }}
           >
-            <Button style={{ flex: 1 }} onPress={editEv}>
-              <Text style={Style.text_400}> แก้ไขข้อมูล</Text>
+            <Button
+              style={{ flex: 1, backgroundColor: "black" }}
+              onPress={editEv}
+            >
+              <Text style={[Style.text_300, { color: "white" }]}>
+                แก้ไขข้อมูล
+              </Text>
             </Button>
-            <Button style={{ flex: 1 }} onPress={deleteEv}>
-              <Text style={Style.text_400}> ลบข้อมูล</Text>
+            <Button
+              style={{ flex: 1, backgroundColor: "black" }}
+              onPress={() => {
+                showDialog3();
+                hideDialog();
+              }}
+            >
+              <Text style={[Style.text_300, { color: "white" }]}>ลบข้อมูล</Text>
+            </Button>
+          </Dialog.Actions>
+        </Dialog>
+        <Dialog visible={visible2} onDismiss={hideDialog2}>
+          <Dialog.Title>
+            <Text style={Style.text_300}>ผลการดำเนินการ</Text>
+          </Dialog.Title>
+          <Dialog.Content>
+            <Text style={Style.text_300}>ลบข้อมูลสำเร็จ</Text>
+          </Dialog.Content>
+          <Dialog.Actions
+            style={{
+              justifyContent: "center",
+            }}
+          >
+            <Button
+              style={{ flex: 1, backgroundColor: "black" }}
+              onPress={hideDialog2}
+            >
+              <Text style={[Style.text_300, { color: "white" }]}>ตกลง</Text>
+            </Button>
+          </Dialog.Actions>
+        </Dialog>
+        <Dialog visible={visible3} onDismiss={hideDialog3}>
+          <Dialog.Title>
+            <Text style={Style.text_300}>ยืนยันการลบข้อมูล</Text>
+          </Dialog.Title>
+          <Dialog.Content>
+            <Text style={Style.text_300}>
+              คุณต้องการลบข้อมูลศิลปิน {selectedName} ใช่ไหม ?
+            </Text>
+          </Dialog.Content>
+          <Dialog.Actions
+            style={{
+              justifyContent: "center",
+            }}
+          >
+            <Button
+              style={{ flex: 1, backgroundColor: "black" }}
+              onPress={() => {
+                hideDialog3();
+                deleteEv();
+              }}
+            >
+              <Text style={[Style.text_300, { color: "white" }]}>ตกลง</Text>
+            </Button>
+
+            <Button
+              style={{ flex: 1, backgroundColor: "black" }}
+              onPress={hideDialog3}
+            >
+              <Text style={[Style.text_300, { color: "white" }]}>ยกเลิก</Text>
             </Button>
           </Dialog.Actions>
         </Dialog>

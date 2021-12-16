@@ -11,6 +11,8 @@ import { Card, Button, Provider, Divider } from "react-native-paper";
 import Style from "../Style";
 import { useFocusEffect } from "@react-navigation/native";
 import { API } from "./ReportAPI";
+import moment from "moment";
+import "moment/locale/th";
 const Report = ({ navigation }) => {
   const [problem, setProblem] = useState(null);
   const [id, setID] = useState(0);
@@ -39,7 +41,6 @@ const Report = ({ navigation }) => {
     if (isMounted && id !== 0) {
       API.reportRead(id)
         .then((resp) => resp.json())
-        .then((resp) => console.log(resp))
         .then(() =>
           navigation.navigate("รายละเอียดปัญหา", {
             id: id,
@@ -59,9 +60,9 @@ const Report = ({ navigation }) => {
       <View>
         {read == 0 ? (
           <TouchableOpacity onPress={() => setID(id)}>
-            <Card style={styles.request}>
+            <Card style={[styles.request, { backgroundColor: "#E5E5E5" }]}>
               <Card.Content style={{ flex: 1, flexDirection: "row" }}>
-                <View style={{ flex: 2.7, justifyContent: "center" }}>
+                <View style={{ flex: 2.3, justifyContent: "center" }}>
                   <Text style={Style.text_400}>{name}</Text>
                 </View>
                 <View
@@ -71,7 +72,9 @@ const Report = ({ navigation }) => {
                     justifyContent: "center",
                   }}
                 >
-                  <Text style={Style.text_400}>2021-09-22</Text>
+                  <Text style={Style.text_400}>
+                    {moment(date).format("ll")}
+                  </Text>
                 </View>
               </Card.Content>
             </Card>
@@ -86,8 +89,8 @@ const Report = ({ navigation }) => {
           >
             <Card style={styles.request}>
               <Card.Content style={{ flex: 1, flexDirection: "row" }}>
-                <View style={{ flex: 1, justifyContent: "center" }}>
-                  <Text style={Style.text_200}>{name}</Text>
+                <View style={{ flex: 2.3, justifyContent: "center" }}>
+                  <Text style={Style.text_400}>{name}</Text>
                 </View>
                 <View
                   style={{
@@ -96,7 +99,9 @@ const Report = ({ navigation }) => {
                     justifyContent: "center",
                   }}
                 >
-                  <Text style={Style.text_200}>{date}</Text>
+                  <Text style={Style.text_400}>
+                    {moment(date).format("ll")}
+                  </Text>
                 </View>
               </Card.Content>
             </Card>
@@ -111,8 +116,8 @@ const Report = ({ navigation }) => {
       {problem ? (
         <View style={{ flex: 1 }}>
           <View style={{ flex: 1 }}>
-            <View style={{ marginHorizontal: 7, marginTop: 7 }}>
-              <Text style={Style.text_400}>รายการร้องขอ</Text>
+            <View style={{ marginHorizontal: 14, marginTop: 7 }}>
+              <Text style={Style.text_400}>รายการร้องขอเรียนปัญหา</Text>
             </View>
             <ScrollView
               style={{

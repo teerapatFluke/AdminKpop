@@ -3,7 +3,8 @@ import { View, Text } from "react-native";
 import Style from "../Style";
 import { useFocusEffect } from "@react-navigation/native";
 import { API } from "./ReportAPI";
-
+import moment from "moment";
+import "moment/locale/th";
 const ReportDetail = ({ route }) => {
   const [problem, setProblem] = useState({});
   const { id } = route.params;
@@ -61,7 +62,7 @@ const ReportDetail = ({ route }) => {
           ></Text_Detail>
           <Text_Detail
             header="วันที่ส่ง"
-            detail={problem.problem_date}
+            detail={moment(problem.problem_date).format("ll")}
           ></Text_Detail>
           <View style={{ marginTop: 7, marginLeft: 14 }}>
             <Text style={Style.text_400}>รายละเอียด</Text>

@@ -1,6 +1,6 @@
 export class API {
   static getEventComplete() {
-    return fetch("http://192.168.1.8:8000/api/event/?complete=0", {
+    return fetch("http://128.199.116.6/api/event/?complete=0&o=-date", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -8,7 +8,7 @@ export class API {
     });
   }
   static getRequest() {
-    return fetch("http://192.168.1.8:8000/api/request/", {
+    return fetch("http://128.199.116.6/api/request/", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -16,7 +16,7 @@ export class API {
     });
   }
   static requestRead(id) {
-    return fetch(`http://192.168.1.8:8000/api/request/${id}/requestread/`, {
+    return fetch(`http://128.199.116.6/api/request/${id}/requestread/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -24,7 +24,7 @@ export class API {
     });
   }
   static getRequestID(id) {
-    return fetch(`http://192.168.1.8:8000/api/request/${id}/`, {
+    return fetch(`http://128.199.116.6/api/request/${id}/`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

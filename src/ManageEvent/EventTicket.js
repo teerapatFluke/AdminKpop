@@ -56,9 +56,41 @@ const EventTicket = () => {
     setType(type);
     setDetail(detail);
   };
+  const [visible2, setVisible2] = useState(false);
+  const showDialog2 = () => {
+    setVisible2(true);
+  };
+  const hideDialog2 = () => setVisible2(false);
+
+  const [visible3, setVisible3] = useState(false);
+  const showDialog3 = () => {
+    setVisible3(true);
+  };
+  const hideDialog3 = () => setVisible3(false);
+  const [visible4, setVisible4] = useState(false);
+  const showDialog4 = () => {
+    setVisible4(true);
+  };
+  const hideDialog4 = () => setVisible4(false);
+  const [visible5, setVisible5] = useState(false);
+  const showDialog5 = () => {
+    setVisible5(true);
+  };
+  const hideDialog5 = () => setVisible5(false);
+  const [visible6, setVisible6] = useState(false);
+  const showDialog6 = () => {
+    setVisible6(true);
+  };
+  const hideDialog6 = () => setVisible6(false);
+  const [visible7, setVisible7] = useState(false);
+  const showDialog7 = () => {
+    setVisible7(true);
+  };
+  const hideDialog7 = () => setVisible7(false);
 
   const hideDialogedit = () => setVisibleedit(false);
   const fetchdata = () => {
+    setDetail("");
     EvAPI.getTicket()
       .then((resp) => resp.json())
       .then((resp) => setticket(resp))
@@ -88,13 +120,25 @@ const EventTicket = () => {
   }, [isUpdate]);
 
   const addTicket = () => {
-    EvAPI.addTicket({ name, detail, type })
-      .then((resp) => resp.json())
-      .then(() => setisUpdate(true))
-      .then(() => setVisibleadd(false))
-      .catch((error) => {
-        console.error(error);
-      });
+    if (type == 1) {
+      EvAPI.addTicket({ name: name, detail: name, type: type })
+        .then((resp) => resp.json())
+        .then(() => setisUpdate(true))
+        .then(() => setVisibleadd(false))
+        .then(() => showDialog7())
+        .catch((error) => {
+          console.error(error);
+        });
+    } else {
+      EvAPI.addTicket({ name: name, detail: detail, type: type })
+        .then((resp) => resp.json())
+        .then(() => setisUpdate(true))
+        .then(() => setVisibleadd(false))
+        .then(() => showDialog7())
+        .catch((error) => {
+          console.error(error);
+        });
+    }
   };
 
   const editTicket = () => {
@@ -102,6 +146,7 @@ const EventTicket = () => {
       .then((resp) => resp.json())
       .then(() => setVisibleedit(false))
       .then(() => setisUpdate(true))
+      .then(() => showDialog3())
       .catch((error) => {
         console.error(error);
       });
@@ -112,6 +157,7 @@ const EventTicket = () => {
       .then((res) => res.text()) // or res.json()
       .then(() => setisUpdate(true))
       .then(() => setVisibleedit(false))
+      .then(() => showDialog5())
       .catch((error) => {
         console.error(error);
       });
@@ -152,7 +198,7 @@ const EventTicket = () => {
           icon="plus"
           size={100}
           onPress={() => showDialogadd()}
-          theme={{ colors: { accent: "#90CAF9" } }}
+          theme={{ colors: { accent: "#2c2c2c" } }}
         />
       )}
 
@@ -166,7 +212,7 @@ const EventTicket = () => {
           </View>
           <View>
             <TextInput
-              style={{ height: 40, marginBottom: 7 }}
+              style={{ height: 50, backgroundColor: "white", marginBottom: 7 }}
               value={name}
               onChangeText={(text) => setname(text)}
             />
@@ -200,10 +246,15 @@ const EventTicket = () => {
                   <View style={{ marginBottom: 7 }}>
                     <Text style={Style.text_200_head}>URL</Text>
                   </View>
+
                   <View>
                     <TextInput
                       placeholder={"www.example.com"}
-                      style={{ height: 40 }}
+                      style={{
+                        height: 50,
+                        backgroundColor: "white",
+                        marginBottom: 7,
+                      }}
                       value={detail}
                       onChangeText={(text) => setDetail(text)}
                     />
@@ -220,7 +271,11 @@ const EventTicket = () => {
                     <TextInput
                       placeholder={"0123456789"}
                       keyboardType="numeric"
-                      style={{ height: 40 }}
+                      style={{
+                        height: 50,
+                        backgroundColor: "white",
+                        marginBottom: 7,
+                      }}
                       value={detail}
                       onChangeText={(text) => setDetail(text)}
                     />
@@ -235,11 +290,19 @@ const EventTicket = () => {
             justifyContent: "center",
           }}
         >
-          <Button style={{ flex: 1 }} onPress={addTicket}>
-            <Text style={Style.text_300}> เพิ่มข้อมูล</Text>
+          <Button
+            style={{ flex: 1, backgroundColor: "black" }}
+            onPress={showDialog6}
+          >
+            <Text style={[Style.text_300, { color: "white" }]}>
+              เพิ่มข้อมูล
+            </Text>
           </Button>
-          <Button style={{ flex: 1 }} onPress={() => console.log("as")}>
-            <Text style={Style.text_300}> ยกเลิก</Text>
+          <Button
+            style={{ flex: 1, backgroundColor: "black" }}
+            onPress={() => hideDialogadd()}
+          >
+            <Text style={[Style.text_300, { color: "white" }]}> ยกเลิก</Text>
           </Button>
         </Dialog.Actions>
       </Dialog>
@@ -254,7 +317,7 @@ const EventTicket = () => {
           </View>
           <View>
             <TextInput
-              style={{ height: 40, marginBottom: 7 }}
+              style={{ height: 50, backgroundColor: "white", marginBottom: 7 }}
               value={name}
               onChangeText={(text) => setname(text)}
             />
@@ -291,7 +354,11 @@ const EventTicket = () => {
                   <View>
                     <TextInput
                       placeholder={"www.example.com"}
-                      style={{ height: 40 }}
+                      style={{
+                        height: 50,
+                        backgroundColor: "white",
+                        marginBottom: 7,
+                      }}
                       value={detail}
                       onChangeText={(text) => setDetail(text)}
                     />
@@ -308,7 +375,7 @@ const EventTicket = () => {
                     <TextInput
                       placeholder={"0123456789"}
                       keyboardType="numeric"
-                      style={{ height: 40 }}
+                      style={{ height: 50, backgroundColor: "white" }}
                       value={detail}
                       onChangeText={(text) => setDetail(text)}
                     />
@@ -323,11 +390,175 @@ const EventTicket = () => {
             justifyContent: "center",
           }}
         >
-          <Button style={{ flex: 1 }} onPress={editTicket}>
-            <Text style={Style.text_300}> แก้ไขข้อมูล</Text>
+          <Button
+            style={{ flex: 1, backgroundColor: "black" }}
+            onPress={showDialog2}
+          >
+            <Text style={[Style.text_300, { color: "white" }]}>
+              แก้ไขข้อมูล
+            </Text>
           </Button>
-          <Button style={{ flex: 1 }} onPress={deleteTicket}>
-            <Text style={Style.text_300}> ลบข้อมูล</Text>
+          <Button
+            style={{ flex: 1, backgroundColor: "black" }}
+            onPress={showDialog4}
+          >
+            <Text style={[Style.text_300, { color: "white" }]}> ลบข้อมูล</Text>
+          </Button>
+        </Dialog.Actions>
+      </Dialog>
+      <Dialog visible={visible2} onDismiss={hideDialog2}>
+        <Dialog.Title>
+          <Text style={Style.text_300}>ยืนยันการแก้ไขข้อมูล,</Text>
+        </Dialog.Title>
+        <Dialog.Content>
+          <Text style={Style.text_300}>
+            คุณต้องการแก้ไขข้อมูลช่องทางการสั่งซื้อบัตรใช่ไหม ?
+          </Text>
+        </Dialog.Content>
+        <Dialog.Actions
+          style={{
+            justifyContent: "center",
+          }}
+        >
+          <Button
+            style={{ flex: 1, backgroundColor: "black" }}
+            onPress={() => {
+              hideDialog2();
+              editTicket();
+            }}
+          >
+            <Text style={[Style.text_300, { color: "white" }]}>ตกลง</Text>
+          </Button>
+
+          <Button
+            style={{ flex: 1, backgroundColor: "black" }}
+            onPress={hideDialog2}
+          >
+            <Text style={[Style.text_300, { color: "white" }]}>ยกเลิก</Text>
+          </Button>
+        </Dialog.Actions>
+      </Dialog>
+      <Dialog visible={visible3} onDismiss={hideDialog3}>
+        <Dialog.Title>
+          <Text style={Style.text_300}>ผลการดำเนินการ</Text>
+        </Dialog.Title>
+        <Dialog.Content>
+          <Text style={Style.text_300}>แก้ไขข้อมูลเสร็จสิ้น</Text>
+        </Dialog.Content>
+        <Dialog.Actions
+          style={{
+            justifyContent: "center",
+          }}
+        >
+          <Button
+            style={{ flex: 1, backgroundColor: "black" }}
+            onPress={hideDialog3}
+          >
+            <Text style={[Style.text_300, { color: "white" }]}>ตกลง</Text>
+          </Button>
+        </Dialog.Actions>
+      </Dialog>
+      <Dialog visible={visible4} onDismiss={hideDialog4}>
+        <Dialog.Title>
+          <Text style={Style.text_300}>ยืนยันการลบข้อมูล,</Text>
+        </Dialog.Title>
+        <Dialog.Content>
+          <Text style={Style.text_300}>
+            คุณต้องการลบข้อมูลช่องทางการสั่งซื้อบัตรใช่ไหม ?
+          </Text>
+        </Dialog.Content>
+        <Dialog.Actions
+          style={{
+            justifyContent: "center",
+          }}
+        >
+          <Button
+            style={{ flex: 1, backgroundColor: "black" }}
+            onPress={() => {
+              hideDialog4();
+              deleteTicket();
+            }}
+          >
+            <Text style={[Style.text_300, { color: "white" }]}>ตกลง</Text>
+          </Button>
+
+          <Button
+            style={{ flex: 1, backgroundColor: "black" }}
+            onPress={hideDialog4}
+          >
+            <Text style={[Style.text_300, { color: "white" }]}>ยกเลิก</Text>
+          </Button>
+        </Dialog.Actions>
+      </Dialog>
+      <Dialog visible={visible5} onDismiss={hideDialog5}>
+        <Dialog.Title>
+          <Text style={Style.text_300}>ผลการดำเนินการ</Text>
+        </Dialog.Title>
+        <Dialog.Content>
+          <Text style={Style.text_300}>ลบข้อมูลเสร็จสิ้น</Text>
+        </Dialog.Content>
+        <Dialog.Actions
+          style={{
+            justifyContent: "center",
+          }}
+        >
+          <Button
+            style={{ flex: 1, backgroundColor: "black" }}
+            onPress={hideDialog5}
+          >
+            <Text style={[Style.text_300, { color: "white" }]}>ตกลง</Text>
+          </Button>
+        </Dialog.Actions>
+      </Dialog>
+      <Dialog visible={visible6} onDismiss={hideDialog6}>
+        <Dialog.Title>
+          <Text style={Style.text_300}>ยืนยันการเพิ่มข้อมูล</Text>
+        </Dialog.Title>
+        <Dialog.Content>
+          <Text style={Style.text_300}>
+            คุณต้องการเพิ่มข้อมูลช่องทางการสั่งซื้อบัตรใช่ไหม ?
+          </Text>
+        </Dialog.Content>
+        <Dialog.Actions
+          style={{
+            justifyContent: "center",
+          }}
+        >
+          <Button
+            style={{ flex: 1, backgroundColor: "black" }}
+            onPress={() => {
+              hideDialog6();
+              addTicket();
+            }}
+          >
+            <Text style={[Style.text_300, { color: "white" }]}>ตกลง</Text>
+          </Button>
+
+          <Button
+            style={{ flex: 1, backgroundColor: "black" }}
+            onPress={hideDialog6}
+          >
+            <Text style={[Style.text_300, { color: "white" }]}>ยกเลิก</Text>
+          </Button>
+        </Dialog.Actions>
+      </Dialog>
+      <Dialog visible={visible7} onDismiss={hideDialog7}>
+        <Dialog.Title>
+          <Text style={Style.text_300}>ผลการดำเนินการ</Text>
+        </Dialog.Title>
+        <Dialog.Content>
+          <Text style={Style.text_300}>เพิ่มข้อมูลเสร็จสิ้น</Text>
+        </Dialog.Content>
+        <Dialog.Actions
+          style={{
+            justifyContent: "center",
+          }}
+        >
+          <Button
+            style={{ flex: 1, backgroundColor: "black" }}
+            onPress={hideDialog7}
+          >
+            <Text style={[Style.text_300, { color: "white" }]}>ตกลง</Text>
           </Button>
         </Dialog.Actions>
       </Dialog>

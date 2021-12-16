@@ -14,12 +14,14 @@ const StackRequest = () => {
         headerTitleStyle: {
           fontFamily: "Kanit_400Regular",
           fontSize: 24,
+          color: "white",
         },
         cardStyle: { backgroundColor: "#fff" },
         headerStyle: {
-          backgroundColor: "#90CAF9",
+          backgroundColor: "#2c2c2c",
         },
         headerBackTitleStyle: { fontFamily: "Kanit_400Regular" },
+        headerTintColor: "white",
       }}
     >
       <Stack.Screen name="รายการร้องขอ" component={Request} />

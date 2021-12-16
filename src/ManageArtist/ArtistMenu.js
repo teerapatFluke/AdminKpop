@@ -14,17 +14,18 @@ import {
   Paragraph,
   Dialog,
   Portal,
-  Button,
   Provider,
+  Button,
   FAB,
 } from "react-native-paper";
 import { useIsFocused } from "@react-navigation/native";
 import { AsAPI } from "./Artist-api";
+import Style from "../Style";
 const ArtistMenu = ({ navigation }) => {
-  const [visible, setVisible] = useState(false);
   const [asSelect, setAsSelect] = useState("");
   const [asid, setAsSelectID] = useState("");
   const isFocused = useIsFocused();
+  const [visible, setVisible] = useState(false);
   const showDialog = ({ artistname, asid }) => {
     setVisible(true);
     setAsSelect(artistname);
@@ -33,7 +34,48 @@ const ArtistMenu = ({ navigation }) => {
 
   const hideDialog = () => setVisible(false);
   const [artist, setArtist] = useState(null);
+  const [visible2, setVisible2] = useState(false);
+  const showDialog2 = () => {
+    setVisible2(true);
+  };
 
+  const hideDialog2 = () => setVisible2(false);
+  const [visible3, setVisible3] = useState(false);
+  const showDialog3 = () => {
+    setVisible3(true);
+  };
+
+  const hideDialog3 = () => setVisible3(false);
+  <Dialog visible={visible} onDismiss={hideDialog}>
+    <Dialog.Title>
+      <Text style={Style.text_300}>ยืนยันการเพิ่มข้อมูล</Text>
+    </Dialog.Title>
+    <Dialog.Content>
+      <Text style={Style.text_300}>คุณต้องการเพิ่มข้อมูลศิลปินใช่ไหม</Text>
+    </Dialog.Content>
+    <Dialog.Actions
+      style={{
+        justifyContent: "center",
+      }}
+    >
+      <Button
+        style={{ flex: 1 }}
+        onPress={() => {
+          hideDialog();
+          addArtist();
+        }}
+      >
+        <Text style={[Style.text_300, { color: "white" }]}>ตกลง</Text>
+      </Button>
+
+      <Button
+        style={{ flex: 1, backgroundColor: "black" }}
+        onPress={hideDialog}
+      >
+        <Text style={[Style.text_300, { color: "white" }]}>ยกเลิก</Text>
+      </Button>
+    </Dialog.Actions>
+  </Dialog>;
   const edit = () => {
     navigation.navigate("แก้ไขข้อมูลศิลปิน", {
       id: asid,
@@ -45,7 +87,10 @@ const ArtistMenu = ({ navigation }) => {
   const deleteAS = () => {
     AsAPI.deleteArtist(asid)
       .then((res) => res.text()) // or res.json()
-      .then(refresh())
+      .then(() => refresh())
+      .then(() => {
+        showDialog2();
+      })
       .catch((error) => {
         console.error(error);
       });
@@ -119,26 +164,89 @@ const ArtistMenu = ({ navigation }) => {
         icon="plus"
         size={100}
         onPress={() => navigation.navigate("เพิ่มข้อมูลศิลปิน")}
-        theme={{ colors: { accent: "#90CAF9" } }}
+        theme={{ colors: { accent: "#2c2c2c" } }}
       />
       <Portal>
         <Dialog visible={visible} onDismiss={hideDialog}>
           <Dialog.Title>
-            <Text style={styles.artist_name}>จัดการข้อมูลศิลปิน</Text>
+            <Text style={Style.text_300}>จัดการข้อมูลศิลปิน</Text>
           </Dialog.Title>
           <Dialog.Content>
-            <Paragraph>{asSelect}</Paragraph>
+            <Text style={Style.text_300}>{asSelect}</Text>
           </Dialog.Content>
           <Dialog.Actions
             style={{
               justifyContent: "center",
             }}
           >
-            <Button style={{ flex: 1 }} onPress={edit}>
-              <Text style={styles.artist_name}> แก้ไขข้อมูล</Text>
+            <Button
+              style={{ flex: 1, backgroundColor: "black" }}
+              onPress={edit}
+            >
+              <Text style={[Style.text_300, { color: "white" }]}>
+                แก้ไขข้อมูล
+              </Text>
             </Button>
-            <Button style={{ flex: 1 }} onPress={deleteAS}>
-              <Text style={styles.artist_name}> ลบข้อมูล</Text>
+            <Button
+              style={{ flex: 1, backgroundColor: "black" }}
+              onPress={() => {
+                showDialog3();
+                hideDialog();
+              }}
+            >
+              <Text style={[Style.text_300, { color: "white" }]}>ลบข้อมูล</Text>
+            </Button>
+          </Dialog.Actions>
+        </Dialog>
+        <Dialog visible={visible2} onDismiss={hideDialog2}>
+          <Dialog.Title>
+            <Text style={Style.text_300}>ผลการดำเนินการ</Text>
+          </Dialog.Title>
+          <Dialog.Content>
+            <Text style={Style.text_300}>ลบข้อมูลสำเร็จ</Text>
+          </Dialog.Content>
+          <Dialog.Actions
+            style={{
+              justifyContent: "center",
+            }}
+          >
+            <Button
+              style={{ flex: 1, backgroundColor: "black" }}
+              onPress={hideDialog2}
+            >
+              <Text style={[Style.text_300, { color: "white" }]}>ตกลง</Text>
+            </Button>
+          </Dialog.Actions>
+        </Dialog>
+        <Dialog visible={visible3} onDismiss={hideDialog3}>
+          <Dialog.Title>
+            <Text style={Style.text_300}>ยืนยันการลบข้อมูล</Text>
+          </Dialog.Title>
+          <Dialog.Content>
+            <Text style={Style.text_300}>
+              คุณต้องการลบข้อมูลศิลปิน {asSelect} ใช่ไหม ?
+            </Text>
+          </Dialog.Content>
+          <Dialog.Actions
+            style={{
+              justifyContent: "center",
+            }}
+          >
+            <Button
+              style={{ flex: 1, backgroundColor: "black" }}
+              onPress={() => {
+                hideDialog3();
+                deleteAS();
+              }}
+            >
+              <Text style={[Style.text_300, { color: "white" }]}>ตกลง</Text>
+            </Button>
+
+            <Button
+              style={{ flex: 1, backgroundColor: "black" }}
+              onPress={hideDialog3}
+            >
+              <Text style={[Style.text_300, { color: "white" }]}>ยกเลิก</Text>
             </Button>
           </Dialog.Actions>
         </Dialog>

@@ -3,6 +3,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import ArtistMenu from "./ArtistMenu";
 import ArtistAdd from "./ArtistAdd";
 import ArtistEdit from "./ArtistEdit";
+import Test from "../Home/Test";
 const Stack = createStackNavigator();
 
 const StackManageArtist = () => {
@@ -13,12 +14,17 @@ const StackManageArtist = () => {
         headerTitleStyle: {
           fontFamily: "Kanit_400Regular",
           fontSize: 24,
+          color: "white",
         },
         cardStyle: { backgroundColor: "#fff" },
         headerStyle: {
-          backgroundColor: "#90CAF9",
+          backgroundColor: "#2c2c2c",
         },
-        headerBackTitleStyle: { fontFamily: "Kanit_400Regular" },
+        headerBackTitleStyle: {
+          fontFamily: "Kanit_400Regular",
+          color: "white",
+        },
+        headerTintColor: "white",
       }}
     >
       <Stack.Screen name="จัดการข้อมูลศิลปิน" component={ArtistMenu} />
