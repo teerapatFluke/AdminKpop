@@ -21,7 +21,7 @@ export default StyleSheet.create({
     width: 144,
     height: 60,
     justifyContent: "center",
-    backgroundColor: "#8EDA5F",
+    backgroundColor: "#000",
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
@@ -36,7 +36,7 @@ export default StyleSheet.create({
     width: 144,
     height: 60,
     justifyContent: "center",
-    backgroundColor: "#FFE57F",
+    backgroundColor: "#000",
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
@@ -75,11 +75,11 @@ export default StyleSheet.create({
     flex: 1,
   },
   text_input: {
-    marginTop: 7,
-    marginHorizontal: 14,
     justifyContent: "center",
     fontFamily: "Kanit_400Regular",
     fontSize: 18,
+    backgroundColor: "#FFF",
+    height: 50,
   },
   text_list: {
     marginLeft: 7,
@@ -89,16 +89,36 @@ export default StyleSheet.create({
   },
   text_input_date: {
     marginTop: 7,
-    marginLeft: 14,
+
     justifyContent: "center",
     fontFamily: "Kanit_400Regular",
     fontSize: 18,
+    height: 50,
+    backgroundColor: "#FFF",
   },
   picker: {
-    flex: 1,
     marginHorizontal: 14,
-    height: 45,
-    backgroundColor: "#E5E5E5",
+    height: 50,
+    backgroundColor: "white",
     justifyContent: "center",
+    marginTop: 7,
+    borderColor: "black",
+    borderWidth: 1,
+  },
+  Submit_Button: {
+    width: 144,
+    height: 60,
+    justifyContent: "center",
+    backgroundColor: "black",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+
+    elevation: 5,
+    alignSelf: "center",
   },
 });
