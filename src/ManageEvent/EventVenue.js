@@ -33,7 +33,6 @@ const EventVenue = () => {
   const [prediction, setPrediction] = useState(null);
   const [mapname, setMapname] = useState("");
   const [mapurl, setMapurl] = useState("");
-  let apikey = "AIzaSyDfxAQKG1HK5pTCfczPmYH50KUkEGKRVFc";
 
   const showDialogadd = () => {
     setVisibleadd(true);
